@@ -37,7 +37,7 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email Us",
-    details: ["admin@visionvistar.com", "admin@visionvistar.com"],
+    details: ["admin@visionvistar.com"],
   },
   {
     icon: Clock,

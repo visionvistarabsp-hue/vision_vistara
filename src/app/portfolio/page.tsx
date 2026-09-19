@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn } from "@/components/Animations";
 import { TypedText } from "@/components/TypingText";
@@ -137,18 +138,23 @@ export default function Portfolio() {
       </section>
 
       {/* Filter Section */}
-      <section className="py-8 px-4 bg-white border-b sticky top-20 z-40">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-wrap items-center justify-center gap-4">
+      <section className="sticky top-20 z-40 bg-white/95 backdrop-blur-md border-b">
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap md:justify-center md:gap-3">
             {categories.map((cat) => (
               <Button
                 key={cat.id}
                 variant={activeCategory === cat.id ? "default" : "secondary"}
-                size="lg"
+                size="sm"
                 onClick={() => setActiveCategory(cat.id)}
-                className={activeCategory === cat.id ? "shadow-lg shadow-purple-500/30" : ""}
+                className={cn(
+                  "shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-sm md:rounded-lg md:px-5 md:py-2.5 md:text-base md:shrink",
+                  activeCategory === cat.id
+                    ? "shadow-lg shadow-purple-500/30"
+                    : ""
+                )}
               >
-                <cat.icon size={18} className="mr-2" />
+                <cat.icon size={16} className="mr-1.5 md:mr-2" />
                 {cat.name}
               </Button>
             ))}
