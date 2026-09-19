@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/Animations";
+import { TypedText } from "@/components/TypingText";
 
 const contactInfo = [
   {
@@ -93,7 +94,12 @@ export default function Contact() {
           <FadeIn>
             <Badge variant="yellow" className="mb-4">Contact Us</Badge>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4 mb-6 font-cursive">
-              Get In <span className="text-yellow-400">Touch</span>
+              <TypedText
+                segments={[
+                  { text: "Get In " },
+                  { text: "Touch", className: "text-yellow-400" },
+                ]}
+              />
             </h1>
             <p className="text-purple-100/80 text-lg max-w-2xl mx-auto">
               Have questions about our properties? Ready to find your dream home?
@@ -136,8 +142,8 @@ export default function Contact() {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <FadeIn direction="left">
-              <Card className="shadow-lg">
-                <CardContent className="p-8">
+              <Card className="shadow-purple-500/10">
+                <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
                       <MessageCircle size={24} className="text-white" />
@@ -276,7 +282,7 @@ export default function Contact() {
             <FadeIn direction="right">
               <div className="space-y-6">
                 {/* Embedded Map */}
-                <Card className="overflow-hidden shadow-lg">
+                <Card className="overflow-hidden shadow-lg shadow-purple-500/20">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59556.884353577!2d82.1276!3d22.0848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a2b4131c1a2e5d5%3A0x41b3b0c0b0c0b0c0!2sBilaspur%2C%20Chhattisgarh!5e0!3m2!1sen!2sin!4v1234567890"
                     width="100%"
@@ -290,7 +296,7 @@ export default function Contact() {
                 </Card>
 
                 {/* Office Locations */}
-                <Card className="shadow-lg">
+<Card className="text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full">
                   <CardContent className="p-6">
                     <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2 font-tech">
                       <Building2 size={20} className="text-purple-600" />

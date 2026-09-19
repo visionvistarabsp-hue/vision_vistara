@@ -8,10 +8,10 @@ import {
   Heart,
   CheckCircle,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/Animations";
+import { TypedText } from "@/components/TypingText";
 
 const values = [
   {
@@ -38,7 +38,7 @@ const milestones = [
   { year: "2018", event: "Company Founded", description: "Vision Vistara established in Bilaspur" },
   { year: "2019", event: "First Project Launch", description: "Successfully launched Yuvraj Park" },
   { year: "2020", event: "RERA Certification", description: "Got certified under RERA guidelines" },
-  { year: "2022", event: "500+ Clients", description: "Achieved milestone of 500 happy clients" },
+  { year: "2022", event: "800+ Clients", description: "Achieved milestone of 800 happy clients" },
   { year: "2024", event: "Expansion", description: "Expanded operations to Raipur and Janjgir-Champa" },
   { year: "2026", event: "Market Leader", description: "Became leading real estate firm in Bilaspur" },
 ];
@@ -85,8 +85,12 @@ export default function About() {
           <FadeIn>
             <Badge variant="yellow" className="mb-4">About Us</Badge>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4 mb-6 font-cursive">
-              Building Trust Since{" "}
-              <span className="text-yellow-400">2018</span>
+              <TypedText
+                segments={[
+                  { text: "Building Trust Since " },
+                  { text: "2018", className: "text-yellow-400" },
+                ]}
+              />
             </h1>
             <p className="text-purple-100/80 text-lg max-w-2xl mx-auto">
               Vision Vistara is a premier real estate firm dedicated to
@@ -115,7 +119,7 @@ export default function About() {
                   />
                 </div>
                 <div className="absolute -bottom-8 -right-8 bg-yellow-400 text-purple-900 p-6 rounded-2xl shadow-xl">
-                  <div className="text-4xl font-bold">8+</div>
+                  <div className="text-4xl font-bold">12+</div>
                   <div className="text-sm font-medium">Years of Trust</div>
                 </div>
               </div>
@@ -145,7 +149,7 @@ export default function About() {
                 <div className="grid grid-cols-2 gap-4">
                   {[
                     { icon: CheckCircle, text: "RERA Certified" },
-                    { icon: CheckCircle, text: "500+ Happy Clients" },
+                    { icon: CheckCircle, text: "800+ Happy Clients" },
                     { icon: CheckCircle, text: "Prime Locations" },
                     { icon: CheckCircle, text: "Transparent Deals" },
                   ].map((item) => (
@@ -211,7 +215,8 @@ export default function About() {
           </FadeIn>
 
           <div className="relative">
-            <div className="absolute left-1/2 -translate-x-1/2 w-1 h-full bg-purple-200"></div>
+            {/* Vertical line: left on mobile, center on md+ */}
+            <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 w-1 h-full bg-purple-200" />
             {milestones.map((milestone, i) => (
               <FadeIn
                 key={milestone.year}
@@ -219,16 +224,18 @@ export default function About() {
                 delay={i * 0.1}
               >
                 <div
-                  className={`relative flex items-center mb-12 ${
-                    i % 2 === 0 ? "flex-row" : "flex-row-reverse"
+                  className={`relative flex md:items-center mb-12 pl-10 md:pl-0 ${
+                    i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                   }`}
                 >
+                  {/* Dot: left on mobile, center on md+ */}
+                  <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 bg-yellow-400 rounded-full border-4 border-white shadow-lg z-10" />
                   <div
-                    className={`w-1/2 ${
-                      i % 2 === 0 ? "pr-12 text-right" : "pl-12 text-left"
+                    className={`w-full md:w-1/2 ${
+                      i % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12 md:text-left"
                     }`}
                   >
-                    <Card className="inline-block">
+                    <Card>
                       <CardContent className="p-6">
                         <div className="text-2xl font-bold text-purple-600 mb-1">
                           {milestone.year}
@@ -242,8 +249,7 @@ export default function About() {
                       </CardContent>
                     </Card>
                   </div>
-                  <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-yellow-400 rounded-full border-4 border-white shadow-lg z-10" />
-                  <div className="w-1/2" />
+                  <div className="hidden md:block w-1/2" />
                 </div>
               </FadeIn>
             ))}
@@ -298,8 +304,8 @@ export default function About() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { number: "500+", label: "Happy Clients" },
-              { number: "50+", label: "Projects" },
+              { number: "800+", label: "Happy Clients" },
+              { number: "8+", label: "Projects" },
               { number: "3", label: "Cities" },
               { number: "100%", label: "RERA Certified" },
             ].map((stat, i) => (

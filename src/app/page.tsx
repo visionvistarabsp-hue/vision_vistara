@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   ArrowRight,
-  Building2,
   MapPin,
   TrendingUp,
   Shield,
@@ -18,11 +17,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/Animations";
+import { TypedText } from "@/components/TypingText";
 
 const stats = [
-  { number: "500+", label: "Happy Clients" },
-  { number: "50+", label: "Projects Completed" },
-  { number: "8+", label: "Years Experience" },
+  { number: "800+", label: "Happy Clients" },
+  { number: "8+", label: "Projects Completed" },
+  { number: "12+", label: "Years Experience" },
   { number: "100%", label: "RERA Certified" },
 ];
 
@@ -123,19 +123,14 @@ export default function Home() {
 
         {/* Center Content */}
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-          <FadeIn direction="up">
-            <div className="mb-4 md:mb-6">
-              <div className="w-16 h-16 md:w-24 md:h-24 mx-auto mb-4 md:mb-6 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl flex items-center justify-center transform rotate-6 shadow-2xl">
-                <span className="text-purple-900 font-bold text-2xl md:text-4xl font-cursive -rotate-6">
-                  V
-                </span>
-              </div>
-            </div>
-          </FadeIn>
-
           <FadeIn direction="up" delay={0.1}>
             <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 tracking-wide font-cursive">
-              Vision <span className="text-yellow-400">Vistara</span>
+              <TypedText
+                segments={[
+                  { text: "Vision " },
+                  { text: "Vistara", className: "text-yellow-400" },
+                ]}
+              />
             </h1>
           </FadeIn>
 
@@ -195,7 +190,7 @@ export default function Home() {
       {/* Stats Section */}
       <section className="relative -mt-12 md:-mt-20 z-30 px-4">
         <FadeIn>
-          <Card className="max-w-5xl mx-auto shadow-xl">
+          <Card className="max-w-5xl mx-auto">
             <CardContent className="p-4 md:p-8">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
                 {stats.map((stat, i) => (
@@ -235,7 +230,7 @@ export default function Home() {
           <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {features.map((feature) => (
               <StaggerItem key={feature.title}>
-                <Card className="group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-gray-100 h-full">
+                <Card className="group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-white/60 h-full">
                   <CardContent className="p-6">
                     <div className="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-purple-600 transition-colors">
                       <feature.icon

@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Phone, Mail, ArrowUpRight, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
 
 const FacebookIcon = ({ size = 18, className }: { size?: number; className?: string }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
@@ -51,21 +51,13 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center gap-3">
-              <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl flex items-center justify-center transform rotate-6">
-                  <span className="text-purple-900 font-bold text-xl -rotate-6">
-                    V
-                  </span>
-                </div>
-              </div>
-              <div>
-                <h2 className="text-xl font-bold font-tech">
-                  Vision <span className="text-yellow-400">Vistara</span>
-                </h2>
-                <p className="text-[10px] text-purple-300 tracking-widest uppercase">
-                  Turning Vision Into Assets
-                </p>
-              </div>
+              <Image
+                src="/images/vision_vistara_logo.png"
+                alt="Vision Vistara"
+                width={116}
+                height={40}
+                className="h-10 w-auto object-contain drop-shadow-[0_2px_6px_rgba(0,0,0,0.4)]"
+              />
             </Link>
             <p className="text-purple-200 text-sm leading-relaxed">
               A premier real estate firm dedicated to delivering exceptional

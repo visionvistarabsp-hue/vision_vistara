@@ -15,7 +15,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { FadeIn, StaggerContainer, StaggerItem } from "@/components/Animations";
+import { FadeIn } from "@/components/Animations";
+import { TypedText } from "@/components/TypingText";
 
 const categories = [
   { id: "all", name: "All Projects", icon: Building2 },
@@ -120,8 +121,12 @@ export default function Portfolio() {
           <FadeIn>
             <Badge variant="yellow" className="mb-4">Our Portfolio</Badge>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4 mb-6 font-cursive">
-              Explore Our{" "}
-              <span className="text-yellow-400">Properties</span>
+              <TypedText
+                segments={[
+                  { text: "Explore Our " },
+                  { text: "Properties", className: "text-yellow-400" },
+                ]}
+              />
             </h1>
             <p className="text-purple-100/80 text-lg max-w-2xl mx-auto">
               Discover our carefully curated selection of residential and
