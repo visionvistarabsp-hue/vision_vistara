@@ -32,12 +32,12 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Call Us",
-    details: ["+91-8460208374", "+91-7869865048"],
+    details: ["+91-9232525253", "+91-7869865048"],
   },
   {
     icon: Mail,
     title: "Email Us",
-    details: ["info@visionvistara.com", "sales@visionvistara.com"],
+    details: ["admin@visionvistar.com", "admin@visionvistar.com"],
   },
   {
     icon: Clock,
@@ -47,9 +47,9 @@ const contactInfo = [
 ];
 
 const offices = [
-  { city: "Bilaspur (Head Office)", address: "Main Road, Sakri, Bilaspur, CG 495001", phone: "+91-8460208374" },
+  { city: "Bilaspur (Head Office)", address: "Main Road, Sakri, Bilaspur, CG 495001", phone: "+91-9232525253" },
   { city: "Raipur", address: "Commercial Hub, GE Road, Raipur, CG 492001", phone: "+91-7869865048" },
-  { city: "Janjgir-Champa", address: "Near Bus Stand, Champa, Janjgir-Champa, CG 495671", phone: "+91-8460208374" },
+  { city: "Janjgir-Champa", address: "Near Bus Stand, Champa, Janjgir-Champa, CG 495671", phone: "+91-9232525253" },
 ];
 
 export default function Contact() {
@@ -201,7 +201,7 @@ export default function Contact() {
                             required
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                            placeholder="+91 8460208374"
+                            placeholder="+91 9232525253"
                           />
                         </div>
                       </div>
@@ -331,13 +331,13 @@ export default function Contact() {
                     </p>
                     <div className="flex flex-wrap gap-3">
                       <Button variant="secondary" size="lg" asChild>
-                        <a href="tel:+918460208374">
+                        <a href="tel:+919232525253">
                           <Phone size={16} className="mr-2" />
                           Call Now
                         </a>
                       </Button>
                       <Button variant="default" size="lg" className="bg-green-500 hover:bg-green-600" asChild>
-                        <a href="https://wa.me/918460208374" target="_blank" rel="noopener noreferrer">
+                        <a href="https://wa.me/919232525253" target="_blank" rel="noopener noreferrer">
                           <MessageCircle size={16} className="mr-2" />
                           WhatsApp
                         </a>

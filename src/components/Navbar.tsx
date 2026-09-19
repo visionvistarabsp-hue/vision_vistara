@@ -290,18 +290,18 @@ export default function Navbar() {
               className="relative px-6 pb-8 space-y-3"
             >
               <a
-                href="tel:+918460208374"
+                href="tel:+919232525253"
                 className="flex items-center gap-3 px-5 py-3.5 text-sm font-medium text-white/80 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors backdrop-blur-md border border-white/10"
               >
                 <Phone size={16} className="text-yellow-400" />
-                +91-8460208374
+                +91-9232525253
               </a>
               <a
-                href="mailto:surabhisoni8817@gmail.com"
+                href="mailto:admin@visionvistar.com"
                 className="flex items-center gap-3 px-5 py-3.5 text-sm font-medium text-white/80 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors backdrop-blur-md border border-white/10"
               >
                 <Mail size={16} className="text-yellow-400" />
-                surabhisoni8817@gmail.com
+                admin@visionvistar.com
               </a>
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
                 <Button

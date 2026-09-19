@@ -45,19 +45,9 @@ const milestones = [
 
 const team = [
   {
-    name: "Surabhi Soni",
+    name: "Aviral Sharma",
     role: "Founder & CEO",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop",
-  },
-  {
-    name: "Rahul Sharma",
-    role: "Head of Sales",
     image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop",
-  },
-  {
-    name: "Priya Patel",
-    role: "Design Director",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop",
   },
 ];
 
@@ -269,7 +259,7 @@ export default function About() {
             </div>
           </FadeIn>
 
-          <StaggerContainer className="grid md:grid-cols-3 gap-8">
+          <StaggerContainer className="grid md:grid-cols-1 gap-8 max-w-md mx-auto">
             {team.map((member) => (
               <StaggerItem key={member.name}>
                 <motion.div whileHover={{ y: -10 }}>

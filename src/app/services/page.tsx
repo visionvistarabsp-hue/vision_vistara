@@ -277,7 +277,7 @@ export default function Services() {
                 </Link>
               </Button>
               <Button variant="outline" size="xl" asChild>
-                <a href="https://wa.me/918460208374" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/919232525253" target="_blank" rel="noopener noreferrer">
                   Chat on WhatsApp
                 </a>
               </Button>

@@ -53,7 +53,7 @@ export default function FloatingButtons() {
       <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
         {/* WhatsApp Button */}
         <motion.a
-          href="https://wa.me/918460208374?text=Hi%20Vision%20Vistara%2C%20I%20am%20interested%20in%20your%20properties."
+          href="https://wa.me/919232525253?text=Hi%20Vision%20Vistara%2C%20I%20am%20interested%20in%20your%20properties."
           target="_blank"
           rel="noopener noreferrer"
           initial={{ scale: 0 }}
@@ -68,7 +68,7 @@ export default function FloatingButtons() {
 
         {/* Email Button */}
         <motion.a
-          href="mailto:info@visionvistara.com?subject=Property%20Inquiry&body=Hi%20Vision%20Vistara%2C%0A%0AI%20am%20interested%20in%20your%20properties.%20Please%20share%20details."
+          href="mailto:admin@visionvistar.com?subject=Property%20Inquiry&body=Hi%20Vision%20Vistara%2C%0A%0AI%20am%20interested%20in%20your%20properties.%20Please%20share%20details."
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 1.2, type: "spring", stiffness: 200 }}
