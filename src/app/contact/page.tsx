@@ -27,7 +27,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Visit Us",
-    details: ["Vision Vistara Real Estate", "Main Road, Sakri, Bilaspur", "Chhattisgarh 495001"],
+    details: ["Vision Vistara Real Estate", "Gaya Vihar Colony, New Sarkanda, Sarkanda", "Bilaspur, Chhattisgarh 495001"],
   },
   {
     icon: Phone,
@@ -47,7 +47,7 @@ const contactInfo = [
 ];
 
 const offices = [
-  { city: "Bilaspur (Head Office)", address: "Main Road, Sakri, Bilaspur, CG 495001", phone: "+91-9232525253" },
+  { city: "Bilaspur (Head Office)", address: "Gaya Vihar Colony, New Sarkanda, Sarkanda, Bilaspur, CG 495001", phone: "+91-9232525253" },
   { city: "Raipur", address: "Commercial Hub, GE Road, Raipur, CG 492001", phone: "+91-7869865048" },
   { city: "Janjgir-Champa", address: "Near Bus Stand, Champa, Janjgir-Champa, CG 495671", phone: "+91-9232525253" },
 ];
@@ -284,7 +284,7 @@ export default function Contact() {
                 {/* Embedded Map */}
                 <Card className="overflow-hidden shadow-lg shadow-purple-500/20">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59556.884353577!2d82.1276!3d22.0848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a2b4131c1a2e5d5%3A0x41b3b0c0b0c0b0c0!2sBilaspur%2C%20Chhattisgarh!5e0!3m2!1sen!2sin!4v1234567890"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.8!2d82.147977!3d22.1005744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a280be17b074ed3%3A0x830a331cb3853898!2sVision%20Vistara%20Bilaspur!5e0!3m2!1sen!2sin!4v1234567890"
                     width="100%"
                     height="300"
                     style={{ border: 0 }}

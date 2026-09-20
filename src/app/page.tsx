@@ -43,7 +43,7 @@ const projects = [
     type: "Residential Plot",
     area: "362 - 2,391 Sq.ft.",
     price: "\u20B910.50 Lac",
-    image: "/images/dream-residency-phase2.jpeg",
+    image: "/images/dream_recidency.jpeg",
   },
   {
     id: 3,
@@ -52,7 +52,7 @@ const projects = [
     type: "Apartments",
     area: "1,200 - 1,800 Sq.ft.",
     price: "\u20B925 Lac",
-    image: "/images/amol-sona-heights.jpg",
+    image: "/images/AmolSonaHeights.png",
   },
 ];
 
@@ -277,7 +277,7 @@ export default function Home() {
               <StaggerItem key={project.id}>
                 <motion.div whileHover={{ y: -10 }}>
                   <Card className="group overflow-hidden hover:shadow-2xl transition-all duration-300">
-                    <div className="relative h-56 overflow-hidden">
+                    <div className="relative h-56 overflow-hidden bg-gray-100">
                       <Image
                         src={project.image}
                         alt={project.name}

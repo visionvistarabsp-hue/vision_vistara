@@ -38,50 +38,36 @@ const projects = [
     id: 2, name: "Dream Residency Phase 2", category: "plots", location: "Ashok Nagar, Bilaspur",
     type: "Residential Plot", area: "362 - 2,391 Sq.ft.", price: "\u20B910.50 Lac",
     status: "Under Construction",
-    image: "/images/dream-residency-phase2.jpeg",
+    image: "/images/dream_recidency.jpeg",
     features: ["Prime Location", "Road Access", "Electricity"],
   },
   {
     id: 3, name: "Amol Sona Heights", category: "apartments", location: "Sarkanda, Bilaspur",
     type: "3 BHK Apartment", area: "1,200 - 1,800 Sq.ft.", price: "\u20B925 Lac",
     status: "Ready to Move",
-    image: "/images/amol-sona-heights.jpg",
+    image: "/images/AmolSonaHeights.png",
     features: ["Swimming Pool", "Gym", "Club House"],
   },
   {
-    id: 4, name: "Vistara Commercial Hub", category: "commercial", location: "Station Road, Bilaspur",
-    type: "Commercial Space", area: "500 - 2,000 Sq.ft.", price: "\u20B935 Lac",
-    status: "Pre-Launch",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
-    features: ["Main Road", "Parking", "High Footfall"],
-  },
-  {
-    id: 5, name: "Green Valley Enclave", category: "plots", location: "Koni, Bilaspur",
-    type: "Residential Plot", area: "1,000 - 2,500 Sq.ft.", price: "\u20B918 Lac",
+    id: 4, name: "Vaikunth Residency", category: "plots", location: "Bilaspur, Chhattisgarh",
+    type: "Residential Plot", area: "500 - 2,000 Sq.ft.", price: "\u20B914 Lac",
     status: "Booking Open",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
-    features: ["Nature View", "Clean Area", "Development"],
+    image: "/images/vaikunth_residency.png",
+    features: ["Premium Location", "Gated Community", "Modern Amenities"],
   },
   {
-    id: 6, name: "City Center Mall Space", category: "commercial", location: "Nehru Nagar, Bilaspur",
-    type: "Retail Space", area: "200 - 800 Sq.ft.", price: "\u20B920 Lac",
-    status: "Ready to Move",
-    image: "https://images.unsplash.com/photo-1582407947092-16f694f478c5?w=800&h=600&fit=crop",
-    features: ["Mall Location", "Anchor Store", "Food Court"],
+    id: 5, name: "Hearth Homes", category: "apartments", location: "Bilaspur, Chhattisgarh",
+    type: "2 & 3 BHK Apartment", area: "900 - 1,600 Sq.ft.", price: "\u20B920 Lac",
+    status: "Booking Open",
+    image: "/images/hearth_homes.png",
+    features: ["Smart Home", "Club House", "Landscaped Gardens"],
   },
   {
-    id: 7, name: "Sunshine Apartments", category: "apartments", location: "Rajkishore Nagar, Bilaspur",
-    type: "2 BHK Apartment", area: "900 - 1,100 Sq.ft.", price: "\u20B918 Lac",
-    status: "Under Construction",
-    image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
-    features: ["Modern Design", "Park View", "Parking"],
-  },
-  {
-    id: 8, name: "Janjgir Gateway", category: "commercial", location: "Champa, Janjgir-Champa",
-    type: "Commercial Complex", area: "300 - 1,500 Sq.ft.", price: "\u20B915 Lac",
-    status: "Pre-Launch",
-    image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&h=600&fit=crop",
-    features: ["Highway Facing", "Investment", "Growing Area"],
+    id: 6, name: "Orchid Farm", category: "plots", location: "Bilaspur, Chhattisgarh",
+    type: "Farm Plot", area: "1,000 - 5,000 Sq.ft.", price: "\u20B925 Lac",
+    status: "Booking Open",
+    image: "/images/orchid_farm.png",
+    features: ["Farmhouse", "Organic Living", "Nature Retreat"],
   },
 ];
 
@@ -183,7 +169,7 @@ export default function Portfolio() {
                   transition={{ duration: 0.3 }}
                 >
                   <Card className="group overflow-hidden hover:shadow-2xl transition-all duration-300 h-full">
-                    <div className="relative h-64 overflow-hidden">
+                    <div className="relative h-64 overflow-hidden bg-gray-100">
                       <Image
                         src={project.image}
                         alt={project.name}

@@ -130,8 +130,8 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-yellow-400 mt-1 shrink-0" />
                 <span className="text-purple-200 text-sm">
-                  Near Gulab Nagar, Shree Shivaya Complex, 1st Floor, Mopka,
-                  Sarkanda, Bilaspur, Chhattisgarh - 495001
+                  Gaya Vihar Colony, New Sarkanda, Sarkanda,
+                  Bilaspur, Chhattisgarh 495001
                 </span>
               </li>
               <li className="flex items-center gap-3">
