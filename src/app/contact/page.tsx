@@ -32,7 +32,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Call Us",
-    details: ["+91-9232525253", "+91-7869865048"],
+    details: ["+91-9232525253"],
   },
   {
     icon: Mail,

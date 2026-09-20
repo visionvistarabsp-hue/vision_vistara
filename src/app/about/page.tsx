@@ -122,22 +122,16 @@ const team = [
   },
   // Creative Team
   {
-    name: "Meera Reddy",
+    name: "Saumya Tiwari",
     role: "Creative Head",
     category: "creative",
     image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop",
   },
   {
-    name: "Rohan Malhotra",
-    role: "Graphic Designer",
+    name: "Ayush Kori",
+    role: "Creative Executive",
     category: "creative",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
-  },
-  {
-    name: "Tanvi Bansal",
-    role: "Content Creator",
-    category: "creative",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop",
   },
 ];
 
