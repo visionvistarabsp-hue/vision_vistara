@@ -48,8 +48,6 @@ const contactInfo = [
 
 const offices = [
   { city: "Bilaspur (Head Office)", address: "Gaya Vihar Colony, New Sarkanda, Sarkanda, Bilaspur, CG 495001", phone: "+91-9232525253" },
-  { city: "Raipur", address: "Commercial Hub, GE Road, Raipur, CG 492001", phone: "+91-7869865048" },
-  { city: "Janjgir-Champa", address: "Near Bus Stand, Champa, Janjgir-Champa, CG 495671", phone: "+91-9232525253" },
 ];
 
 export default function Contact() {
