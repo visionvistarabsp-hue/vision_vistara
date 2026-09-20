@@ -108,14 +108,14 @@ const team = [
   },
   // Accountant
   {
-    name: "Pooja Sharma",
+    name: "Sita Vastrakar",
     role: "Accountant",
     category: "accounts",
     image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop",
   },
   // Tech Team
   {
-    name: "Arun Yadav",
+    name: "Nikhil Dubey",
     role: "Tech Lead",
     category: "tech",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
