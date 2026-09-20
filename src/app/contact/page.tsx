@@ -84,7 +84,7 @@ export default function Contact() {
             className="w-full h-full object-cover"
           >
             <source
-              src="/hero-video.mp4"
+              src="https://assets.mixkit.co/videos/49843/49843-720.mp4"
               type="video/mp4"
             />
           </video>
@@ -93,7 +93,7 @@ export default function Contact() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <FadeIn>
             <Badge variant="yellow" className="mb-4">Contact Us</Badge>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4 mb-6 font-cursive">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4 mb-6 font-tech">
               <TypedText
                 segments={[
                   { text: "Get In " },

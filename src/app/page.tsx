@@ -113,7 +113,7 @@ export default function Home() {
             className="w-full h-full object-cover"
           >
             <source
-              src="/hero-video.mp4"
+              src="https://assets.mixkit.co/videos/49843/49843-720.mp4"
               type="video/mp4"
             />
           </video>
@@ -124,7 +124,7 @@ export default function Home() {
         {/* Center Content */}
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
           <FadeIn direction="up" delay={0.1}>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 tracking-wide font-cursive">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 tracking-wide font-tech">
               <TypedText
                 segments={[
                   { text: "Vision " },
