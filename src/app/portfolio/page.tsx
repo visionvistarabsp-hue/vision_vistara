@@ -31,7 +31,7 @@ const projects = [
     id: 1, name: "Yuvraj Park", category: "plots", location: "Sakri, Bilaspur",
     type: "Residential Plot", area: "638 - 1,699 Sq.ft.", price: "\u20B911.62 Lac",
     status: "Ready to Move",
-    image: "/images/yuvraj-park.png",
+    image: "/images/yuvraj_park.jpeg",
     features: ["Gated Community", "Park", "24/7 Security"],
   },
   {
@@ -169,7 +169,7 @@ export default function Portfolio() {
                   transition={{ duration: 0.3 }}
                 >
                   <Card className="group overflow-hidden hover:shadow-2xl transition-all duration-300 h-full">
-                    <div className="relative h-64 overflow-hidden bg-gray-100">
+                    <div className="relative h-72 overflow-hidden bg-gray-100">
                       <Image
                         src={project.image}
                         alt={project.name}

@@ -49,7 +49,7 @@ const team = [
     name: "Aviral Sharma",
     role: "Founder & CEO",
     category: "leadership",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop",
+    image: "/images/aviral_shrama.jpeg",
   },
   // Sales Team
   {
@@ -354,7 +354,7 @@ export default function About() {
           <div className="flex justify-center mb-10">
             <motion.div whileHover={{ y: -5 }} className="w-56">
               <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 border-purple-200">
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-56 overflow-hidden">
                   <Image
                     src={team[0].image}
                     alt={team[0].name}
