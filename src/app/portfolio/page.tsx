@@ -31,21 +31,21 @@ const projects = [
     id: 1, name: "Yuvraj Park", category: "plots", location: "Sakri, Bilaspur",
     type: "Residential Plot", area: "638 - 1,699 Sq.ft.", price: "\u20B911.62 Lac",
     status: "Ready to Move",
-    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
+    image: "/images/yuvraj-park.png",
     features: ["Gated Community", "Park", "24/7 Security"],
   },
   {
     id: 2, name: "Dream Residency Phase 2", category: "plots", location: "Ashok Nagar, Bilaspur",
     type: "Residential Plot", area: "362 - 2,391 Sq.ft.", price: "\u20B910.50 Lac",
     status: "Under Construction",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
+    image: "/images/dream-residency-phase2.jpeg",
     features: ["Prime Location", "Road Access", "Electricity"],
   },
   {
     id: 3, name: "Amol Sona Heights", category: "apartments", location: "Sarkanda, Bilaspur",
     type: "3 BHK Apartment", area: "1,200 - 1,800 Sq.ft.", price: "\u20B925 Lac",
     status: "Ready to Move",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
+    image: "/images/amol-sona-heights.jpg",
     features: ["Swimming Pool", "Gym", "Club House"],
   },
   {
@@ -112,7 +112,7 @@ export default function Portfolio() {
             className="w-full h-full object-cover"
           >
             <source
-              src="https://assets.mixkit.co/videos/1588/1588-720.mp4"
+              src="/portfolio-video.mp4"
               type="video/mp4"
             />
           </video>
@@ -188,7 +188,7 @@ export default function Portfolio() {
                         src={project.image}
                         alt={project.name}
                         fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="object-contain group-hover:scale-105 transition-transform duration-500"
                         unoptimized
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />

@@ -84,7 +84,7 @@ export default function Contact() {
             className="w-full h-full object-cover"
           >
             <source
-              src="https://assets.mixkit.co/videos/49843/49843-720.mp4"
+              src="/hero-video.mp4"
               type="video/mp4"
             />
           </video>

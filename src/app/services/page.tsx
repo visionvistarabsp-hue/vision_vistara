@@ -98,7 +98,7 @@ export default function Services() {
             className="w-full h-full object-cover"
           >
             <source
-              src="https://assets.mixkit.co/videos/16610/16610-720.mp4"
+              src="/services-video.mp4"
               type="video/mp4"
             />
           </video>

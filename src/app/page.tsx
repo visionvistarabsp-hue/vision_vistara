@@ -34,7 +34,7 @@ const projects = [
     type: "Residential Plot",
     area: "638 - 1,699 Sq.ft.",
     price: "\u20B911.62 Lac",
-    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
+    image: "/images/yuvraj-park.png",
   },
   {
     id: 2,
@@ -43,7 +43,7 @@ const projects = [
     type: "Residential Plot",
     area: "362 - 2,391 Sq.ft.",
     price: "\u20B910.50 Lac",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
+    image: "/images/dream-residency-phase2.jpeg",
   },
   {
     id: 3,
@@ -52,7 +52,7 @@ const projects = [
     type: "Apartments",
     area: "1,200 - 1,800 Sq.ft.",
     price: "\u20B925 Lac",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
+    image: "/images/amol-sona-heights.jpg",
   },
 ];
 
@@ -113,7 +113,7 @@ export default function Home() {
             className="w-full h-full object-cover"
           >
             <source
-              src="https://assets.mixkit.co/videos/49843/49843-720.mp4"
+              src="/hero-video.mp4"
               type="video/mp4"
             />
           </video>
@@ -282,7 +282,7 @@ export default function Home() {
                         src={project.image}
                         alt={project.name}
                         fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="object-contain group-hover:scale-105 transition-transform duration-500"
                         unoptimized
                       />
                       <div className="absolute top-4 left-4">

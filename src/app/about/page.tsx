@@ -44,10 +44,100 @@ const milestones = [
 ];
 
 const team = [
+  // Founder & CEO
   {
     name: "Aviral Sharma",
     role: "Founder & CEO",
+    category: "leadership",
     image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop",
+  },
+  // Sales Team
+  {
+    name: "Rahul Verma",
+    role: "Sales Head",
+    category: "sales",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+  },
+  {
+    name: "Priya Singh",
+    role: "Senior Sales Executive",
+    category: "sales",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
+  },
+  {
+    name: "Amit Patel",
+    role: "Sales Executive",
+    category: "sales",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
+  },
+  {
+    name: "Neha Gupta",
+    role: "Sales Executive",
+    category: "sales",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
+  },
+  {
+    name: "Vikram Singh",
+    role: "Sales Executive",
+    category: "sales",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
+  },
+  {
+    name: "Ananya Desai",
+    role: "Sales Executive",
+    category: "sales",
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop",
+  },
+  {
+    name: "Rajesh Kumar",
+    role: "Sales Executive",
+    category: "sales",
+    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop",
+  },
+  {
+    name: "Sneha Joshi",
+    role: "Sales Executive",
+    category: "sales",
+    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop",
+  },
+  {
+    name: "Karan Mehta",
+    role: "Sales Executive",
+    category: "sales",
+    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop",
+  },
+  // Accountant
+  {
+    name: "Pooja Sharma",
+    role: "Accountant",
+    category: "accounts",
+    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop",
+  },
+  // Tech Team
+  {
+    name: "Arun Yadav",
+    role: "Tech Lead",
+    category: "tech",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+  },
+  // Creative Team
+  {
+    name: "Meera Reddy",
+    role: "Creative Head",
+    category: "creative",
+    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop",
+  },
+  {
+    name: "Rohan Malhotra",
+    role: "Graphic Designer",
+    category: "creative",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+  },
+  {
+    name: "Tanvi Bansal",
+    role: "Content Creator",
+    category: "creative",
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop",
   },
 ];
 
@@ -65,7 +155,7 @@ export default function About() {
             className="w-full h-full object-cover"
           >
             <source
-              src="https://assets.mixkit.co/videos/49855/49855-720.mp4"
+              src="/about-video.mp4"
               type="video/mp4"
             />
           </video>
@@ -259,8 +349,9 @@ export default function About() {
             </div>
           </FadeIn>
 
-          <StaggerContainer className="grid md:grid-cols-1 gap-8 max-w-md mx-auto">
-            {team.map((member) => (
+          {/* Founder & CEO */}
+          <StaggerContainer className="grid md:grid-cols-1 gap-8 max-w-md mx-auto mb-16">
+            {team.filter(m => m.category === "leadership").map((member) => (
               <StaggerItem key={member.name}>
                 <motion.div whileHover={{ y: -10 }}>
                   <Card className="overflow-hidden hover:shadow-xl transition-all duration-300">
@@ -286,6 +377,159 @@ export default function About() {
               </StaggerItem>
             ))}
           </StaggerContainer>
+
+          {/* Sales Team */}
+          <FadeIn>
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold text-gray-900 font-tech">
+                Sales <span className="text-purple-600">Team</span>
+              </h3>
+            </div>
+          </FadeIn>
+          <StaggerContainer className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-16">
+            {team.filter(m => m.category === "sales").map((member) => (
+              <StaggerItem key={member.name}>
+                <motion.div whileHover={{ y: -10 }}>
+                  <Card className="overflow-hidden hover:shadow-xl transition-all duration-300">
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={member.image}
+                        alt={member.name}
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                    </div>
+                    <CardContent className="p-4 text-center">
+                      <h3 className="text-lg font-bold text-gray-900 font-tech">
+                        {member.name}
+                      </h3>
+                      <p className="text-purple-600 font-medium text-sm mt-1">
+                        {member.role}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+
+          {/* Other Departments */}
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Accounts */}
+            <div>
+              <FadeIn>
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 font-tech">
+                    Accounts <span className="text-purple-600">Team</span>
+                  </h3>
+                </div>
+              </FadeIn>
+              <StaggerContainer className="grid gap-6">
+                {team.filter(m => m.category === "accounts").map((member) => (
+                  <StaggerItem key={member.name}>
+                    <motion.div whileHover={{ y: -10 }}>
+                      <Card className="overflow-hidden hover:shadow-xl transition-all duration-300">
+                        <div className="relative h-48 overflow-hidden">
+                          <Image
+                            src={member.image}
+                            alt={member.name}
+                            fill
+                            className="object-cover"
+                            unoptimized
+                          />
+                        </div>
+                        <CardContent className="p-4 text-center">
+                          <h3 className="text-lg font-bold text-gray-900 font-tech">
+                            {member.name}
+                          </h3>
+                          <p className="text-purple-600 font-medium text-sm mt-1">
+                            {member.role}
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </div>
+
+            {/* Tech */}
+            <div>
+              <FadeIn>
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 font-tech">
+                    Tech <span className="text-purple-600">Team</span>
+                  </h3>
+                </div>
+              </FadeIn>
+              <StaggerContainer className="grid gap-6">
+                {team.filter(m => m.category === "tech").map((member) => (
+                  <StaggerItem key={member.name}>
+                    <motion.div whileHover={{ y: -10 }}>
+                      <Card className="overflow-hidden hover:shadow-xl transition-all duration-300">
+                        <div className="relative h-48 overflow-hidden">
+                          <Image
+                            src={member.image}
+                            alt={member.name}
+                            fill
+                            className="object-cover"
+                            unoptimized
+                          />
+                        </div>
+                        <CardContent className="p-4 text-center">
+                          <h3 className="text-lg font-bold text-gray-900 font-tech">
+                            {member.name}
+                          </h3>
+                          <p className="text-purple-600 font-medium text-sm mt-1">
+                            {member.role}
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </div>
+
+            {/* Creative */}
+            <div>
+              <FadeIn>
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 font-tech">
+                    Creative <span className="text-purple-600">Team</span>
+                  </h3>
+                </div>
+              </FadeIn>
+              <StaggerContainer className="grid gap-6">
+                {team.filter(m => m.category === "creative").map((member) => (
+                  <StaggerItem key={member.name}>
+                    <motion.div whileHover={{ y: -10 }}>
+                      <Card className="overflow-hidden hover:shadow-xl transition-all duration-300">
+                        <div className="relative h-48 overflow-hidden">
+                          <Image
+                            src={member.image}
+                            alt={member.name}
+                            fill
+                            className="object-cover"
+                            unoptimized
+                          />
+                        </div>
+                        <CardContent className="p-4 text-center">
+                          <h3 className="text-lg font-bold text-gray-900 font-tech">
+                            {member.name}
+                          </h3>
+                          <p className="text-purple-600 font-medium text-sm mt-1">
+                            {member.role}
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </div>
+          </div>
         </div>
       </section>
 
