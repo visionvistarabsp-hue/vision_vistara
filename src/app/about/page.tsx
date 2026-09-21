@@ -62,7 +62,7 @@ const team = [
     name: "Lekhram Verma",
     role: "Sales Executive",
     category: "sales",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
+    image: "/images/lekh_ram.jpeg",
   },
   {
     name: "Nitesh Jesawal",
@@ -74,19 +74,19 @@ const team = [
     name: "Sumit Dubey",
     role: "Sales Executive",
     category: "sales",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop",
+    image: "/images/sumit_dubey.png",
   },
   {
     name: "Nitish Kumar",
     role: "Sales Executive",
     category: "sales",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop",
+    image: "/images/nitish_kumar.jpeg",
   },
   {
-    name: "Manish Yadav",
+    name: "Manish Dehari",
     role: "Sales Executive",
-    category: "sales",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
+    category: "creative",
+    image: "/images/manish_dehari.png",
   },
   {
     name: "Kiyanshu Ratre",
@@ -95,23 +95,23 @@ const team = [
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
   },
   {
-    name: "Gaggu Yadav",
+    name: "G K Yadav",
     role: "Sales Executive",
     category: "sales",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+    image: "/images/gk_yadav.jpeg",
   },
   {
     name: "Sonu Thakur",
     role: "Sales Executive",
     category: "sales",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop",
+    image: "/images/sonu_thakur.png",
   },
   // Accountant
   {
     name: "Sita Vastrakar",
     role: "Accountant",
     category: "accounts",
-    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop",
+    image: "/images/sita_vastrakaar.png",
   },
   // Tech Team
   {
@@ -125,7 +125,7 @@ const team = [
     name: "Saumya Tiwari",
     role: "Creative Head",
     category: "creative",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop",
+    image: "/images/saumya_tiwari.jpeg",
   },
   {
     name: "Ayush Kori",

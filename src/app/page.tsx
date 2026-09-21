@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -12,6 +13,11 @@ import {
   ChevronRight,
   Star,
   Phone,
+  Landmark,
+  Home as HomeIcon,
+  Building2,
+  X,
+  Layers,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -31,26 +37,32 @@ const projects = [
     id: 1,
     name: "Yuvraj Park",
     location: "Sakri, Bilaspur",
-    type: "Residential Plot",
-    area: "638 - 1,699 Sq.ft.",
+    type: "Ongoing",
+    tagline: "Modern Homes, A Better Tomorrow",
+    bhk: "2BHK & 3BHK",
+    units: "120 Units",
     price: "\u20B911.62 Lac",
     image: "/images/yuvraj_park.jpeg",
   },
   {
     id: 2,
     name: "Dream Residency Phase 2",
-    location: "Ashok Nagar, Bilaspur",
-    type: "Residential Plot",
-    area: "362 - 2,391 Sq.ft.",
+    location: "Ashok Nagar, Sarkanda",
+    type: "Ongoing",
+    tagline: "Modern Homes, A Better Tomorrow",
+    bhk: "2BHK & 3BHK",
+    units: "120 Units",
     price: "\u20B910.50 Lac",
     image: "/images/dream_recidency.jpeg",
   },
   {
     id: 3,
     name: "Amol Sona Heights",
-    location: "Sarkanda, Bilaspur",
-    type: "Apartments",
-    area: "1,200 - 1,800 Sq.ft.",
+    location: "Devnanadan Nagar, Sarkanda",
+    type: "Ongoing",
+    tagline: "Modern Homes, A Better Tomorrow",
+    bhk: "2BHK & 3BHK",
+    units: "120 Units",
     price: "\u20B925 Lac",
     image: "/images/AmolSonaHeights.png",
   },
@@ -58,26 +70,60 @@ const projects = [
 
 const features = [
   {
-    icon: Shield,
-    title: "RERA Certified",
-    description: "All our projects are RERA compliant ensuring transparency and trust.",
+    icon: Landmark,
+    title: "Investor",
+    description: "Invest with Vision. Build with Confidence.",
   },
   {
-    icon: MapPin,
-    title: "Prime Locations",
-    description: "Strategically located properties in Bilaspur's most sought-after areas.",
+    icon: HomeIcon,
+    title: "Buyer",
+    description: "The Right Property. The Right Guidance.",
   },
   {
-    icon: TrendingUp,
-    title: "High ROI",
-    description: "Properties that offer excellent returns on your investment.",
-  },
-  {
-    icon: Users,
-    title: "Expert Guidance",
-    description: "Professional team with deep local market knowledge.",
+    icon: Building2,
+    title: "Developer",
+    description: "Your Project. Our Sales Expertise.",
   },
 ];
+
+const featureDetails: Record<string, { intro: string; benefits: string[]; cta: string }> = {
+  Investor: {
+    intro: "Vision Vistara is building a technology-driven real-estate business focused on scalable growth, strong market opportunities and transparent operations.",
+    benefits: [
+      "Business growth opportunity",
+      "Real-estate market expertise",
+      "Technology-led operations",
+      "Transparent business processes",
+      "Scalable expansion across markets",
+    ],
+    cta: "Contact Us",
+  },
+  Buyer: {
+    intro: "We help buyers discover suitable residential, commercial and investment opportunities with transparent information and professional guidance throughout the property-buying journey.",
+    benefits: [
+      "Curated Property Options",
+      "Transparent Information",
+      "RERA-Compliant Opportunities",
+      "Expert Guidance",
+      "End-to-End Assistance",
+      "Better-Informed Decisions",
+    ],
+    cta: "Contact Us",
+  },
+  Developer: {
+    intro: "We partner with builders and developers to drive project sales through structured sales strategy, marketing, technology and market expertise.",
+    benefits: [
+      "Project Sales & Marketing",
+      "Lead Generation",
+      "Digital Marketing",
+      "Sales Strategy",
+      "Customer Acquisition",
+      "Market Intelligence",
+      "Performance Tracking",
+    ],
+    cta: "Partner With Us",
+  },
+};
 
 const testimonials = [
   {
@@ -97,7 +143,9 @@ const testimonials = [
   },
 ];
 
-export default function Home() {
+export default function HomePage() {
+  const [selectedFeature, setSelectedFeature] = useState<string | null>(null);
+
   return (
     <>
       {/* Hero Section - Fullscreen Video */}
@@ -124,11 +172,13 @@ export default function Home() {
         {/* Center Content */}
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
           <FadeIn direction="up" delay={0.1}>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 tracking-wide font-tech">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-wide font-tech">
               <TypedText
                 segments={[
-                  { text: "Vision " },
-                  { text: "Vistara", className: "text-yellow-400" },
+                  { text: "Turning " },
+                  { text: "Vision", className: "text-yellow-400" },
+                  { text: " Into " },
+                  { text: "Assets", className: "text-yellow-400" },
                 ]}
               />
             </h1>
@@ -136,7 +186,7 @@ export default function Home() {
 
           <FadeIn direction="up" delay={0.2}>
             <p className="text-white/80 text-sm sm:text-lg md:text-xl tracking-[0.2em] sm:tracking-[0.3em] uppercase mb-6 md:mb-8">
-              Turning Vision Into Assets
+              Better Properties. Smarter Decisions.
             </p>
           </FadeIn>
 
@@ -146,9 +196,9 @@ export default function Home() {
 
           <FadeIn direction="up" delay={0.4}>
             <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto mb-6 md:mb-10 leading-relaxed">
-              Your trusted partner for premium residential and commercial
-              properties in Bilaspur, Chhattisgarh. Discover your dream
-              property with Vision Vistara.
+              Discover RERA-compliant residential, commercial and investment
+              opportunities backed by local expertise, technology and transparent
+              guidance.
             </p>
           </FadeIn>
 
@@ -163,7 +213,7 @@ export default function Home() {
               <Button variant="outline" size="lg" className="sm:size-xl bg-white/10 border-white/30 text-white hover:bg-white/20 backdrop-blur-sm" asChild>
                 <Link href="/contact">
                   <Phone size={18} className="mr-2" />
-                  Contact Us
+                  Talk to an Expert
                 </Link>
               </Button>
             </div>
@@ -221,13 +271,16 @@ export default function Home() {
             <div className="text-center mb-16">
               <Badge variant="yellow" className="mb-3">Why Choose Us</Badge>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-3 font-tech">
-                The Vision Vistara{" "}
-                <span className="text-purple-600">Advantage</span>
+                Built For Every Side of{" "}
+                <span className="text-purple-600">Real Estate</span>
               </h2>
+              <p className="text-gray-500 mt-3 text-sm md:text-base max-w-xl mx-auto">
+                We create value across the real-estate ecosystem — for investors, developers and property buyers.
+              </p>
             </div>
           </FadeIn>
 
-          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
             {features.map((feature) => (
               <StaggerItem key={feature.title}>
                 <Card className="group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-white/60 h-full">
@@ -241,9 +294,16 @@ export default function Home() {
                     <h3 className="text-lg font-semibold text-gray-900 mb-2 font-tech">
                       {feature.title}
                     </h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">
+                    <p className="text-gray-500 text-sm leading-relaxed mb-4">
                       {feature.description}
                     </p>
+                    <button
+                      onClick={() => setSelectedFeature(feature.title)}
+                      className="text-purple-600 text-sm font-semibold hover:text-purple-800 transition-colors flex items-center gap-1 group/btn"
+                    >
+                      Explore More
+                      <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
+                    </button>
                   </CardContent>
                 </Card>
               </StaggerItem>
@@ -260,8 +320,11 @@ export default function Home() {
               <div>
                 <Badge variant="yellow" className="mb-3">Featured Projects</Badge>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-3 font-tech">
-                  Discover Our <span className="text-purple-600">Premium Properties</span>
+                  Explore Our <span className="text-purple-600">Projects</span>
                 </h2>
+                <p className="text-gray-500 mt-3 text-sm md:text-base max-w-xl">
+                  Discover thoughtfully developed residential and commercial spaces designed for living, working and investing.
+                </p>
               </div>
               <Button variant="ghost" className="mt-4 md:mt-0 text-purple-600 hover:text-purple-700" asChild>
                 <Link href="/portfolio">
@@ -282,29 +345,42 @@ export default function Home() {
                         src={project.image}
                         alt={project.name}
                         fill
-                        className="object-contain group-hover:scale-105 transition-transform duration-500"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
                         unoptimized
                       />
                       <div className="absolute top-4 left-4">
-                        <Badge variant="yellow">{project.type}</Badge>
+                        <Badge className="bg-yellow-400/60 text-yellow-900 backdrop-blur-sm border-yellow-500/20 hover:bg-yellow-400/70">{project.type}</Badge>
                       </div>
-                      <div className="absolute bottom-4 right-4">
-                        <Badge variant="purple">{project.price}</Badge>
+                      <div className="absolute top-4 right-4">
+                        <Badge className="bg-purple-600/60 text-white backdrop-blur-sm border-purple-500/20 hover:bg-purple-600/70">RERA Registered</Badge>
                       </div>
                     </div>
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2 font-tech">
+                      <p className="text-xs text-purple-600 font-semibold uppercase tracking-wider mb-1">Residential</p>
+                      <h3 className="text-xl font-bold text-gray-900 mb-1 font-tech">
                         {project.name}
                       </h3>
+                      {project.tagline && (
+                        <p className="text-xs text-gray-400 italic mb-2">{project.tagline}</p>
+                      )}
                       <div className="flex items-center gap-2 text-gray-500 text-sm mb-3">
                         <MapPin size={14} className="text-purple-500" />
                         {project.location}
                       </div>
                       <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                        <span className="text-sm text-gray-500">{project.area}</span>
+                        <div className="flex items-center gap-4">
+                          <span className="flex items-center gap-1.5 text-sm text-gray-600 font-medium">
+                            <HomeIcon size={14} className="text-purple-500" />
+                            {project.bhk}
+                          </span>
+                          <span className="flex items-center gap-1.5 text-sm text-gray-600 font-medium">
+                            <Layers size={14} className="text-purple-500" />
+                            {project.units}
+                          </span>
+                        </div>
                         <Button variant="ghost" size="sm" className="text-purple-600 hover:text-yellow-500 p-0" asChild>
                           <Link href="/contact">
-                            Enquire Now
+                            View Project
                             <ChevronRight size={14} className="ml-1" />
                           </Link>
                         </Button>
@@ -330,22 +406,27 @@ export default function Home() {
               <div className="relative grid lg:grid-cols-2 gap-8 md:gap-12 items-center p-6 md:p-12">
                 <div>
                   <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-tech">
-                    Ready to Find Your Dream Property?
+                    Let&apos;s Build Your Next Real Estate Move.
                   </h2>
                   <p className="text-purple-100/80 mb-8 leading-relaxed">
-                    Let our expert team guide you to the perfect property
-                    investment. Whether you&apos;re looking for residential plots,
-                    apartments, or commercial spaces, we have the right options
-                    for you.
+                    Whether you&apos;re looking to invest, bring your project to market,
+                    or find the right property, Vision Vistara is here to help you
+                    move forward with clarity and confidence.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                     <Button variant="yellow" size="lg" asChild>
-                      <Link href="/portfolio">View Properties</Link>
+                      <Link href="/portfolio">Explore Properties</Link>
                     </Button>
                     <Button variant="outline" size="lg" asChild>
-                      <Link href="/contact">Schedule Visit</Link>
+                      <Link href="/contact">Talk to Our Team</Link>
                     </Button>
                   </div>
+                  <p className="mt-5 text-sm text-purple-200/70">
+                    Are you a developer or investor?{" "}
+                    <Link href="/contact" className="text-yellow-400 hover:text-yellow-300 font-semibold underline underline-offset-2 transition-colors">
+                      Partner With Vision Vistara →
+                    </Link>
+                  </p>
                 </div>
                 <div className="hidden lg:block">
                   <Image
@@ -409,6 +490,94 @@ export default function Home() {
           </StaggerContainer>
         </div>
       </section>
+
+      {/* Feature Detail Modal */}
+      <AnimatePresence>
+        {selectedFeature && featureDetails[selectedFeature] && (
+          <motion.div
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            {/* Backdrop */}
+            <motion.div
+              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+              onClick={() => setSelectedFeature(null)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
+
+            {/* Modal Content */}
+            <motion.div
+              className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto"
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedFeature(null)}
+                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors z-10"
+              >
+                <X size={18} className="text-gray-600" />
+              </button>
+
+              {/* Header with gradient */}
+              <div className="bg-gradient-to-r from-purple-600 to-purple-800 p-6 rounded-t-2xl">
+                <div className="flex items-center gap-3 mb-2">
+                  {(() => {
+                    const feature = features.find(f => f.title === selectedFeature);
+                    if (feature) {
+                      const Icon = feature.icon;
+                      return (
+                        <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                          <Icon size={22} className="text-white" />
+                        </div>
+                      );
+                    }
+                    return null;
+                  })()}
+                  <h3 className="text-xl font-bold text-white font-tech">
+                    {selectedFeature}
+                  </h3>
+                </div>
+              </div>
+
+              {/* Body */}
+              <div className="p-6">
+                <p className="text-gray-600 text-sm leading-relaxed mb-5">
+                  {featureDetails[selectedFeature].intro}
+                </p>
+
+                <h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-3">
+                  Key Benefits
+                </h4>
+                <ul className="space-y-2.5 mb-6">
+                  {featureDetails[selectedFeature].benefits.map((benefit) => (
+                    <li key={benefit} className="flex items-start gap-2.5">
+                      <div className="w-5 h-5 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <ChevronRight size={12} className="text-purple-600" />
+                      </div>
+                      <span className="text-gray-700 text-sm">{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTA */}
+                <Button variant="yellow" size="lg" className="w-full" asChild>
+                  <Link href="/contact">
+                    {featureDetails[selectedFeature].cta}
+                    <ArrowRight size={16} className="ml-2" />
+                  </Link>
+                </Button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
