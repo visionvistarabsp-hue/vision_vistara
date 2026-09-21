@@ -30,6 +30,9 @@ const quickLinks = [
   { name: "About Us", href: "/about" },
   { name: "Portfolio", href: "/portfolio" },
   { name: "Services", href: "/services" },
+  { name: "For Investors", href: "/investor" },
+  { name: "For Developers", href: "/developer" },
+  { name: "For Buyers", href: "/buyers" },
   { name: "Contact", href: "/contact" },
 ];
 
