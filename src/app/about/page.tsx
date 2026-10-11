@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/Animations";
 import { TypedText } from "@/components/TypingText";
 
@@ -18,19 +19,19 @@ const values = [
     icon: Target,
     title: "Our Mission",
     description:
-      "To be the most trusted real estate partner, creating lasting value and fulfilling dreams through expert guidance, sustainable practices, and unparalleled customer service.",
+      "To simplify real estate through technology, market expertise and transparent processes — helping every stakeholder make more informed decisions.",
   },
   {
     icon: Eye,
     title: "Our Vision",
     description:
-      "To transform the real estate landscape of Chhattisgarh by delivering innovative, sustainable, and customer-centric property solutions.",
+      "To build a technology-driven real estate ecosystem that creates meaningful opportunities for investors, developers and property buyers across growing markets.",
   },
   {
     icon: Heart,
     title: "Our Values",
     description:
-      "Trust, Transparency, Innovation, and Customer-First approach form the foundation of everything we do at Vision Vistara.",
+      "We believe every relationship begins with transparency. We use technology to make real estate smarter and more efficient. We focus on understanding needs before offering solutions. We continuously improve how we work, deliver and grow.",
   },
 ];
 
@@ -54,55 +55,61 @@ const team = [
   // Sales Team
   {
     name: "Maniram Sahu",
-    role: "Sales Head",
+    role: "Team Leader",
     category: "sales",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
   },
   {
     name: "Lekhram Verma",
-    role: "Sales Executive",
+    role: "Team Leader",
     category: "sales",
     image: "/images/lekh_ram.jpeg",
   },
   {
     name: "Nitesh Jesawal",
-    role: "Sales Executive",
+    role: "Team Leader",
     category: "sales",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
   },
   {
     name: "Sumit Dubey",
-    role: "Sales Executive",
+    role: "Team Leader",
     category: "sales",
     image: "/images/sumit_dubey.png",
   },
   {
     name: "Nitish Kumar",
-    role: "Sales Executive",
+    role: "Team Leader",
     category: "sales",
     image: "/images/nitish_kumar.jpeg",
   },
   {
     name: "Manish Dehari",
-    role: "Sales Executive",
+    role: "Graphic Designer",
     category: "creative",
     image: "/images/manish_dehari.png",
   },
   {
     name: "Kiyanshu Ratre",
-    role: "Sales Executive",
+    role: "Team Leader",
     category: "sales",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
   },
   {
     name: "G K Yadav",
-    role: "Sales Executive",
+    role: "Team Leader",
     category: "sales",
     image: "/images/gk_yadav.jpeg",
   },
   {
     name: "Sonu Thakur",
-    role: "Sales Executive",
+    role: "Team Leader",
+    category: "sales",
+    image: "/images/sonu_thakur.png",
+  },
+   {
+    name: "Manish Yadav",
+    role: "Team Leader",
     category: "sales",
     image: "/images/sonu_thakur.png",
   },
@@ -157,20 +164,23 @@ export default function About() {
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <FadeIn>
-            <Badge variant="yellow" className="mb-4">About Us</Badge>
+            <Badge variant="yellow" className="mb-4">About Vision Vistara</Badge>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4 mb-6 font-tech">
               <TypedText
                 segments={[
-                  { text: "Building Trust Since " },
-                  { text: "2018", className: "text-yellow-400" },
+                  { text: "Building a Smarter Future in Real Estate " },
+                  
                 ]}
               />
             </h1>
             <p className="text-purple-100/80 text-lg max-w-2xl mx-auto">
-              Vision Vistara is a premier real estate firm dedicated to
-              delivering exceptional property solutions for residential,
-              commercial, and investment needs.
+             Vision Vistara is a technology-driven real estate company connecting investors, developers and property buyers through market expertise, transparent processes and smarter real-estate solutions.
             </p>
+            <div className="mt-8 flex justify-center">
+              <Button asChild variant="yellow" size="lg">
+                <a href="#our-team">Meet Our Team</a>
+              </Button>
+            </div>
           </FadeIn>
         </div>
       </section>
@@ -193,8 +203,8 @@ export default function About() {
                   />
                 </div>
                 <div className="absolute -bottom-8 -right-8 bg-yellow-400 text-purple-900 p-6 rounded-2xl shadow-xl">
-                  <div className="text-4xl font-bold">12+</div>
-                  <div className="text-sm font-medium">Years of Trust</div>
+                  <div className="text-4xl font-bold">100%</div>
+                  <div className="text-sVision Vm font-small">RERA CERTIFIED</div>
                 </div>
               </div>
             </FadeIn>
@@ -207,25 +217,27 @@ export default function About() {
                   <span className="text-purple-600">Valuable Assets</span>
                 </h2>
                 <p className="text-gray-600 leading-relaxed mb-6">
-                  Vision Vistara was founded in 2018 with a clear vision - to
-                  transform the real estate landscape of Chhattisgarh. Our
-                  dynamic team brings deep local market knowledge and extensive
-                  experience across development, finance, and sales.
+                  Vision Vistara began with a simple vision — to make real estate more transparent, accessible and opportunity-driven.
+
+Since our journey began in 2018, we have grown by working closely with property buyers, developers and real-estate stakeholders. What started as a focused real-estate venture has evolved into a technology-driven business built around property, people and long-term relationships.
+
                 </p>
                 <p className="text-gray-600 leading-relaxed mb-8">
-                  We are committed to providing our clients with the best
-                  investment opportunities and helping them achieve their dream
-                  of owning a property. With RERA certification and a track
-                  record of successful projects, we have become the trusted
-                  name in Bilaspur&apos;s real estate market.
+                  From identifying promising projects and markets to supporting sales, marketing and property decisions, we continue to expand our capabilities with every opportunity.
+
+Today, we are building Vision Vistara as a scalable real-estate platform — with technology, market expertise and trust at the centre of everything we do.
                 </p>
+
+                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mt-2 mb-4 font-tech">
+                  <span className="text-purple-600">2022</span> — Vision Vistara begins its journey
+                </h3>
 
                 <div className="grid grid-cols-2 gap-4">
                   {[
-                    { icon: CheckCircle, text: "RERA Certified" },
-                    { icon: CheckCircle, text: "800+ Happy Clients" },
-                    { icon: CheckCircle, text: "Prime Locations" },
-                    { icon: CheckCircle, text: "Transparent Deals" },
+                    { icon: CheckCircle, text: "Growth expanding projects,Client and capabilities" },
+                    { icon: CheckCircle, text: "Technology building technology-led real estate processes" },
+                    { icon: CheckCircle, text: "TodayConnecting investors, developers & property buyers" },
+                    { icon: CheckCircle, text: "Expanding into new markets" },
                   ].map((item) => (
                     <div
                       key={item.text}
@@ -247,10 +259,11 @@ export default function About() {
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <div className="text-center mb-16">
-              <Badge variant="yellow" className="mb-3">What Drives Us</Badge>
+              <Badge variant="yellow" className="mb-3">Our Philosophy</Badge>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-3 font-tech">
-                Our <span className="text-purple-600">Philosophy</span>
+                Guided by Purpose <span className="text-purple-600">Driven by People</span>
               </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto mt-4">We believe real estate is not just about properties. It is about creating opportunities, building trust and making better decisions.</p>
             </div>
           </FadeIn>
 
@@ -332,14 +345,20 @@ export default function About() {
       </section>
 
       {/* Team Section */}
-      <section className="py-16 px-4 bg-gradient-to-b from-purple-50 to-white">
+      <section
+        id="our-team"
+        className="py-16 px-4 bg-gradient-to-b from-purple-50 to-white scroll-mt-20"
+      >
         <div className="max-w-6xl mx-auto">
           <FadeIn>
             <div className="text-center mb-10">
               <Badge variant="yellow" className="mb-3">Our Team</Badge>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-3 font-tech">
-                Meet the <span className="text-purple-600">Leaders</span>
+                The People Behind<span className="text-purple-600"> Vision Vistara</span>
               </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto mt-4">
+                A team bringing together real-estate expertise, technology, sales and creative thinking to build better experiences across the property journey.
+              </p>
               <div className="w-20 h-1 bg-gradient-to-r from-purple-500 to-yellow-400 mx-auto mt-4 rounded-full" />
             </div>
           </FadeIn>
@@ -504,27 +523,7 @@ export default function About() {
       </section>
 
       {/* Stats */}
-      <section className="py-24 px-4 bg-gradient-to-r from-purple-600 to-purple-800">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { number: "800+", label: "Happy Clients" },
-              { number: "8+", label: "Projects" },
-              { number: "3", label: "Cities" },
-              { number: "100%", label: "RERA Certified" },
-            ].map((stat, i) => (
-              <FadeIn key={stat.label} delay={i * 0.1}>
-                <div className="text-center">
-                  <div className="text-4xl md:text-5xl font-bold text-yellow-400 mb-2">
-                    {stat.number}
-                  </div>
-                  <div className="text-purple-100">{stat.label}</div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
+      
     </>
   );
 }

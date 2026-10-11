@@ -110,14 +110,13 @@ export default function Portfolio() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4 mb-6 font-tech">
               <TypedText
                 segments={[
-                  { text: "Explore Our " },
-                  { text: "Properties", className: "text-yellow-400" },
+                  { text: "Find a property that  " },
+                  { text: "Fits Your Life", className: "text-yellow-400" },
                 ]}
               />
             </h1>
             <p className="text-purple-100/80 text-lg max-w-2xl mx-auto">
-              Discover our carefully curated selection of residential and
-              commercial properties across Bilaspur and Chhattisgarh.
+              Explore residential and real estate projects curated and marketed by Vision Vistara.
             </p>
           </FadeIn>
         </div>
@@ -238,15 +237,20 @@ export default function Portfolio() {
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-tech">
-              Can&apos;t Find What You&apos;re Looking For?
+              Found a Project You Like?
             </h2>
             <p className="text-purple-100/80 mb-8 max-w-2xl mx-auto">
-              Our team can help you find the perfect property that matches your
-              requirements. Get in touch with us for personalized assistance.
+             Let’s help you take the next step.
             </p>
             <Button variant="yellow" size="xl" asChild>
               <a href="/contact">
-                Contact Our Team
+                Talk to Our Team
+                <ArrowRight size={18} className="ml-2" />
+              </a>
+            </Button>
+            <Button variant="yellow" size="xl" asChild className="ml-4">
+              <a href="/contact">
+                Schedule a Site Visit
                 <ArrowRight size={18} className="ml-2" />
               </a>
             </Button>

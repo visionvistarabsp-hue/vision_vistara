@@ -39,6 +39,9 @@
   body {
     overflow-x: clip;
   }
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 /* Custom utilities */

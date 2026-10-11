@@ -30,19 +30,16 @@ const quickLinks = [
   { name: "About Us", href: "/about" },
   { name: "Portfolio", href: "/portfolio" },
   { name: "Services", href: "/services" },
-  { name: "For Investors", href: "/investor" },
-  { name: "For Developers", href: "/developer" },
-  { name: "For Buyers", href: "/buyers" },
+
   { name: "Contact", href: "/contact" },
 ];
 
 const services = [
-  "Residential Properties",
-  "Commercial Properties",
-  "Investment Advisory",
-  "Property Management",
-  "Legal Consultation",
-  "Home Loans",
+  "For developers",
+  "For buyers",
+  "For investors",
+  "Real Estate Technology",
+  
 ];
 
 export default function Footer() {
@@ -63,9 +60,9 @@ export default function Footer() {
               />
             </Link>
             <p className="text-purple-200 text-sm leading-relaxed">
-              A premier real estate firm dedicated to delivering exceptional
-              property solutions for residential, commercial, and investment
-              needs, built on a foundation of trust and innovation.
+              Real estate solutions built around strategy, expertise and technology.
+
+We help developers, buyers and investors navigate real estate with the right guidance, execution and solutions.
             </p>
             <div className="flex gap-3">
               {[FacebookIcon, InstagramIcon, LinkedinIcon].map((Icon, i) => (
@@ -133,8 +130,7 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-yellow-400 mt-1 shrink-0" />
                 <span className="text-purple-200 text-sm">
-                  Gaya Vihar Colony, New Sarkanda, Sarkanda,
-                  Bilaspur, Chhattisgarh 495001
+                   Nutan Chowk, Sarkanda, Bilaspur, CG 495001
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -144,14 +140,14 @@ export default function Footer() {
               <li className="flex items-center gap-3">
                 <Mail size={18} className="text-yellow-400 shrink-0" />
                 <span className="text-purple-200 text-sm">
-                  admin@visionvistar.com
+                  admin@visionvistara.com
                 </span>
               </li>
             </ul>
 
             {/* Newsletter */}
             <div className="mt-6">
-              <p className="text-sm text-purple-300 mb-3">Subscribe to updates</p>
+              <p className="text-sm text-purple-300 mb-3">Get the latest updates, projects and insights from Vision Vistara.</p>
               <div className="flex gap-2">
                 <Input
                   type="email"
@@ -175,8 +171,7 @@ export default function Footer() {
             &copy; 2026 Vision Vistara. All rights reserved.
           </p>
           <p className="text-purple-400 text-xs flex items-center gap-1">
-            Made with <Heart size={12} className="text-red-400" /> in
-            Chhattisgarh
+            Building Partnerships That Move Real Estate Forward.
           </p>
         </div>
       </div>

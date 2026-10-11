@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   MapPin,
   Phone,
@@ -13,6 +14,11 @@ import {
   MessageCircle,
   User,
   FileText,
+  ArrowRight,
+  Cpu,
+  HardHat,
+  Home,
+  TrendingUp,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -27,7 +33,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Visit Us",
-    details: ["Vision Vistara Real Estate", "Gaya Vihar Colony, New Sarkanda, Sarkanda", "Bilaspur, Chhattisgarh 495001"],
+    details: ["Head Office : Nutan Chowk, Sarkanda, Bilaspur, CG 495001","Branch Office : Beside Gulab nagar, mopka , bilaspur, CG 495001"],
   },
   {
     icon: Phone,
@@ -42,12 +48,47 @@ const contactInfo = [
   {
     icon: Clock,
     title: "Working Hours",
-    details: ["Mon - Sat: 9:00 AM - 7:00 PM", "Sunday: By Appointment"],
+    details: ["Open All Day: 9:00 AM – 7:00 PM", "Festival & Public Holidays: By Appointment Only"],
   },
 ];
 
 const offices = [
-  { city: "Bilaspur (Head Office)", address: "Gaya Vihar Colony, New Sarkanda, Sarkanda, Bilaspur, CG 495001", phone: "+91-9232525253" },
+  { city: "Bilaspur (Head Office)", address: "Nutan Chowk, Sarkanda, Bilaspur, CG 495001", phone: "+91-9232525253" },
+];
+
+const lookupCards = [
+  {
+    icon: Home,
+    title: "I'm Looking to Buy",
+    description: "Browse our curated portfolio of premium properties and find your perfect home.",
+    buttonLabel: "Find a Property",
+    href: "/portfolio",
+    comingSoon: false,
+  },
+  {
+    icon: TrendingUp,
+    title: "I'm Looking to Invest",
+    description: "Explore high-return real estate opportunities with our investment team.",
+    buttonLabel: "Talk to an Advisor",
+    href: "/contact",
+    comingSoon: false,
+  },
+  {
+    icon: HardHat,
+    title: "I'm a Developer",
+    description: "Partner with us to bring your residential and commercial projects to life.",
+    buttonLabel: "Discuss Your Project",
+    href: "/contact",
+    comingSoon: false,
+  },
+  {
+    icon: Cpu,
+    title: "I'm Looking for Technology Solutions",
+    description: "Discover smart real estate technology built for the modern property market.",
+    buttonLabel: "Explore Technology",
+    href: "/contact",
+    comingSoon: true,
+  },
 ];
 
 export default function Contact() {
@@ -94,16 +135,65 @@ export default function Contact() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4 mb-6 font-tech">
               <TypedText
                 segments={[
-                  { text: "Get In " },
-                  { text: "Touch", className: "text-yellow-400" },
+                  { text: "Let’s Talk " },
+                  { text: "Real Estate.", className: "text-yellow-400" },
                 ]}
               />
             </h1>
             <p className="text-purple-100/80 text-lg max-w-2xl mx-auto">
-              Have questions about our properties? Ready to find your dream home?
-              Reach out to us and our team will be happy to assist you.
+              Whether you&apos;re looking to buy a property, explore an investment, develop a project, or build better real estate solutions with technology — we&apos;re here to help.
             </p>
           </FadeIn>
+        </div>
+      </section>
+
+      {/* Choose What You're Looking For */}
+      <section className="py-24 px-4">
+        <div className="max-w-7xl mx-auto">
+          <FadeIn className="text-center mb-12">
+            <Badge variant="purple" className="mb-4">How Can We Help?</Badge>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 font-tech">
+              Choose What You&apos;re Looking For:
+            </h2>
+            <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
+              Tell us who you are and we&apos;ll point you in the right direction.
+            </p>
+          </FadeIn>
+
+          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {lookupCards.map((card) => (
+              <StaggerItem key={card.title}>
+                <Card className="h-full text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <CardContent className="p-6 flex flex-col items-center">
+                    <div className="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                      <card.icon size={24} className="text-purple-600" />
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-3 font-tech">
+                      {card.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-6">{card.description}</p>
+                    {card.comingSoon ? (
+                      <div className="mt-auto flex flex-col items-center gap-2 w-full">
+                        <Button variant="default" size="lg" disabled className="w-full">
+                          {card.buttonLabel}
+                        </Button>
+                        <Badge variant="purple">Coming Soon</Badge>
+                      </div>
+                    ) : (
+                      <div className="mt-auto w-full">
+                        <Button variant="gradient" size="lg" asChild className="w-full">
+                          <Link href={card.href}>
+                            {card.buttonLabel}
+                            <ArrowRight size={16} className="ml-2" />
+                          </Link>
+                        </Button>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
         </div>
       </section>
 
@@ -148,7 +238,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h2 className="text-2xl font-bold text-gray-900 font-tech">
-                        Send Us a Message
+                        Tell Us How We Can Help
                       </h2>
                       <p className="text-gray-500 text-sm">
                         We&apos;ll get back to you within 24 hours
@@ -221,7 +311,7 @@ export default function Contact() {
                         <div className="space-y-2">
                           <Label htmlFor="contact-subject">
                             <FileText size={14} className="inline mr-1" />
-                            Subject
+                            I'm Interested In
                           </Label>
                           <select
                             id="contact-subject"
@@ -229,12 +319,12 @@ export default function Contact() {
                             onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                             className="flex h-10 w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                           >
-                            <option value="">Select a subject</option>
-                            <option value="buying">Property Inquiry</option>
-                            <option value="selling">Sell My Property</option>
-                            <option value="investment">Investment Inquiry</option>
-                            <option value="consultation">Free Consultation</option>
-                            <option value="other">Other</option>
+                            <option value="">Buying a Property</option>
+                            <option value="buying">Real Estate Investment</option>
+                            <option value="selling">Developer Solutions</option>
+                            <option value="investment">Real Estate Technology</option>
+                            
+                            <option value="other">General Enquiry</option>
                           </select>
                         </div>
                       </div>
@@ -294,29 +384,7 @@ export default function Contact() {
                 </Card>
 
                 {/* Office Locations */}
-<Card className="text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full">
-                  <CardContent className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2 font-tech">
-                      <Building2 size={20} className="text-purple-600" />
-                      Our Offices
-                    </h3>
-                    <div className="space-y-4">
-                      {offices.map((office) => (
-                        <div
-                          key={office.city}
-                          className="flex items-start gap-3 p-3 bg-purple-50 rounded-xl"
-                        >
-                          <MapPin size={18} className="text-purple-600 mt-0.5 shrink-0" />
-                          <div>
-                            <p className="font-semibold text-gray-900">{office.city}</p>
-                            <p className="text-sm text-gray-600">{office.address}</p>
-                            <p className="text-sm text-purple-600 font-medium">{office.phone}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+
 
                 {/* Quick Contact */}
                 <Card className="bg-gradient-to-r from-purple-600 to-purple-800 border-0 text-white">

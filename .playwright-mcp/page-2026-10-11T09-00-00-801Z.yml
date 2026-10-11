@@ -1,0 +1,227 @@
+- generic [active] [ref=f2e1]:
+  - banner [ref=f2e2]:
+    - generic [ref=f2e3]:
+      - link [ref=f2e4] [cursor=pointer]:
+        - /url: /
+        - img "Vision Vistara" [ref=f2e5]
+      - navigation [ref=f2e6]:
+        - link "Home" [ref=f2e7] [cursor=pointer]:
+          - /url: /
+        - link "About" [ref=f2e10] [cursor=pointer]:
+          - /url: /about
+        - link "Portfolio" [ref=f2e12] [cursor=pointer]:
+          - /url: /portfolio
+        - link "Services" [ref=f2e14] [cursor=pointer]:
+          - /url: /services
+        - link "Contact" [ref=f2e16] [cursor=pointer]:
+          - /url: /contact
+      - link "Get Free Consultation" [ref=f2e19] [cursor=pointer]:
+        - /url: /contact
+  - main [ref=f2e20]:
+    - generic [ref=f2e25]:
+      - heading "Turning Vision Into Assets" [level=1] [ref=f2e27]
+      - paragraph [ref=f2e31]: Better Properties. Smarter Decisions.
+      - paragraph [ref=f2e35]: Discover RERA-compliant residential, commercial and investment opportunities backed by local expertise, technology and transparent guidance.
+      - generic [ref=f2e37]:
+        - link "Explore Properties" [ref=f2e38] [cursor=pointer]:
+          - /url: /portfolio
+        - link "Talk to an Expert" [ref=f2e41] [cursor=pointer]:
+          - /url: /contact
+    - generic [ref=f2e51]:
+      - generic [ref=f2e52]:
+        - generic [ref=f2e53]: 800+
+        - generic [ref=f2e54]: Happy Clients
+      - generic [ref=f2e55]:
+        - generic [ref=f2e56]: 8+
+        - generic [ref=f2e57]: Projects Completed
+      - generic [ref=f2e58]:
+        - generic [ref=f2e59]: 12+
+        - generic [ref=f2e60]: Years Experience
+      - generic [ref=f2e61]:
+        - generic [ref=f2e62]: 100%
+        - generic [ref=f2e63]: RERA Certified
+    - generic [ref=f2e65]:
+      - generic [ref=f2e67]:
+        - generic [ref=f2e68]: Why Choose Us
+        - heading "Built For Every Side of Real Estate" [level=2] [ref=f2e69]
+        - paragraph [ref=f2e70]: We create value across the real-estate ecosystem — for investors, developers and property buyers.
+      - generic [ref=f2e71]:
+        - generic [ref=f2e74]:
+          - heading "Investor" [level=3] [ref=f2e78]
+          - paragraph [ref=f2e79]: Invest with Vision. Build with Confidence.
+          - button "Explore More" [ref=f2e80] [cursor=pointer]
+        - generic [ref=f2e85]:
+          - heading "Buyer" [level=3] [ref=f2e90]
+          - paragraph [ref=f2e91]: The Right Property. The Right Guidance.
+          - button "Explore More" [ref=f2e92] [cursor=pointer]
+        - generic [ref=f2e97]:
+          - heading "Developer" [level=3] [ref=f2e103]
+          - paragraph [ref=f2e104]: Your Project. Our Sales Expertise.
+          - button "Explore More" [ref=f2e105] [cursor=pointer]
+    - generic [ref=f2e109]:
+      - generic [ref=f2e111]:
+        - generic [ref=f2e112]:
+          - generic [ref=f2e113]: Featured Projects
+          - heading "Explore Our Projects" [level=2] [ref=f2e114]
+          - paragraph [ref=f2e115]: Discover thoughtfully developed residential and commercial spaces designed for living, working and investing.
+        - link "View All Projects" [ref=f2e116] [cursor=pointer]:
+          - /url: /portfolio
+      - generic [ref=f2e119]:
+        - generic [ref=f2e122]:
+          - generic [ref=f2e123]:
+            - img "Yuvraj Park" [ref=f2e124]
+            - generic [ref=f2e125]: Ongoing
+            - generic [ref=f2e127]: RERA Registered
+          - generic [ref=f2e129]:
+            - paragraph [ref=f2e130]: Residential
+            - heading "Yuvraj Park" [level=3] [ref=f2e131]
+            - paragraph [ref=f2e132]: Modern Homes, A Better Tomorrow
+            - generic [ref=f2e133]: Sakri, Bilaspur
+            - generic [ref=f2e137]:
+              - generic [ref=f2e138]:
+                - generic [ref=f2e139]: 2BHK & 3BHK
+                - generic [ref=f2e143]: 120 Units
+              - link "View Project" [ref=f2e148] [cursor=pointer]:
+                - /url: /contact
+        - generic [ref=f2e153]:
+          - generic [ref=f2e154]:
+            - img "Dream Residency Phase 2" [ref=f2e155]
+            - generic [ref=f2e156]: Ongoing
+            - generic [ref=f2e158]: RERA Registered
+          - generic [ref=f2e160]:
+            - paragraph [ref=f2e161]: Residential
+            - heading "Dream Residency Phase 2" [level=3] [ref=f2e162]
+            - paragraph [ref=f2e163]: Modern Homes, A Better Tomorrow
+            - generic [ref=f2e164]: Ashok Nagar, Sarkanda
+            - generic [ref=f2e168]:
+              - generic [ref=f2e169]:
+                - generic [ref=f2e170]: 2BHK & 3BHK
+                - generic [ref=f2e174]: 120 Units
+              - link "View Project" [ref=f2e179] [cursor=pointer]:
+                - /url: /contact
+        - generic [ref=f2e184]:
+          - generic [ref=f2e185]:
+            - img "Amol Sona Heights" [ref=f2e186]
+            - generic [ref=f2e187]: Ongoing
+            - generic [ref=f2e189]: RERA Registered
+          - generic [ref=f2e191]:
+            - paragraph [ref=f2e192]: Residential
+            - heading "Amol Sona Heights" [level=3] [ref=f2e193]
+            - paragraph [ref=f2e194]: Modern Homes, A Better Tomorrow
+            - generic [ref=f2e195]: Devnanadan Nagar, Sarkanda
+            - generic [ref=f2e199]:
+              - generic [ref=f2e200]:
+                - generic [ref=f2e201]: 2BHK & 3BHK
+                - generic [ref=f2e205]: 120 Units
+              - link "View Project" [ref=f2e210] [cursor=pointer]:
+                - /url: /contact
+    - generic [ref=f2e220]:
+      - generic [ref=f2e221]:
+        - heading "Let's Build Your Next Real Estate Move." [level=2] [ref=f2e222]
+        - paragraph [ref=f2e223]: Whether you're looking to invest, bring your project to market, or find the right property, Vision Vistara is here to help you move forward with clarity and confidence.
+        - generic [ref=f2e224]:
+          - link "Explore Properties" [ref=f2e225] [cursor=pointer]:
+            - /url: /portfolio
+          - link "Talk to Our Team" [ref=f2e226] [cursor=pointer]:
+            - /url: /contact
+        - paragraph [ref=f2e227]:
+          - text: Are you a developer or investor?
+          - link "Partner With Vision Vistara →" [ref=f2e228] [cursor=pointer]:
+            - /url: /contact
+      - img "Contact Us" [ref=f2e230]
+    - generic [ref=f2e232]:
+      - generic [ref=f2e234]:
+        - generic [ref=f2e235]: Testimonials
+        - heading "What Our Clients Say" [level=2] [ref=f2e236]
+      - generic [ref=f2e237]:
+        - generic [ref=f2e240]:
+          - paragraph [ref=f2e252]: “Vision Vistara made my property buying experience seamless. Their team was professional and helpful throughout.”
+          - generic [ref=f2e253]:
+            - generic [ref=f2e254]: S
+            - generic [ref=f2e256]: Shanu Zafar
+        - generic [ref=f2e259]:
+          - paragraph [ref=f2e271]: “Excellent service and great properties. I successfully closed deals with their help. Highly recommended!”
+          - generic [ref=f2e272]:
+            - generic [ref=f2e273]: J
+            - generic [ref=f2e275]: Jaya
+        - generic [ref=f2e278]:
+          - paragraph [ref=f2e290]: “They understood my requirements perfectly and found me the ideal property. Great attention to detail.”
+          - generic [ref=f2e291]:
+            - generic [ref=f2e292]: K
+            - generic [ref=f2e294]: Kishan Tandlekar
+  - contentinfo [ref=f2e295]:
+    - generic [ref=f2e297]:
+      - generic [ref=f2e298]:
+        - link [ref=f2e299] [cursor=pointer]:
+          - /url: /
+          - img "Vision Vistara" [ref=f2e300]
+        - paragraph [ref=f2e301]: A premier real estate firm dedicated to delivering exceptional property solutions for residential, commercial, and investment needs, built on a foundation of trust and innovation.
+        - generic [ref=f2e302]:
+          - button [ref=f2e303] [cursor=pointer]
+          - button [ref=f2e306] [cursor=pointer]
+          - button [ref=f2e309] [cursor=pointer]
+      - generic [ref=f2e312]:
+        - heading "Quick Links" [level=3] [ref=f2e313]
+        - list [ref=f2e315]:
+          - listitem [ref=f2e316]:
+            - link "Home" [ref=f2e317] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=f2e321]:
+            - link "About Us" [ref=f2e322] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=f2e326]:
+            - link "Portfolio" [ref=f2e327] [cursor=pointer]:
+              - /url: /portfolio
+          - listitem [ref=f2e331]:
+            - link "Services" [ref=f2e332] [cursor=pointer]:
+              - /url: /services
+          - listitem [ref=f2e336]:
+            - link "For Investors" [ref=f2e337] [cursor=pointer]:
+              - /url: /investor
+          - listitem [ref=f2e341]:
+            - link "For Developers" [ref=f2e342] [cursor=pointer]:
+              - /url: /developer
+          - listitem [ref=f2e346]:
+            - link "For Buyers" [ref=f2e347] [cursor=pointer]:
+              - /url: /buyers
+          - listitem [ref=f2e351]:
+            - link "Contact" [ref=f2e352] [cursor=pointer]:
+              - /url: /contact
+      - generic [ref=f2e356]:
+        - heading "Our Services" [level=3] [ref=f2e357]
+        - list [ref=f2e359]:
+          - listitem [ref=f2e360]:
+            - generic [ref=f2e361]: Residential Properties
+          - listitem [ref=f2e363]:
+            - generic [ref=f2e364]: Commercial Properties
+          - listitem [ref=f2e366]:
+            - generic [ref=f2e367]: Investment Advisory
+          - listitem [ref=f2e369]:
+            - generic [ref=f2e370]: Property Management
+          - listitem [ref=f2e372]:
+            - generic [ref=f2e373]: Legal Consultation
+          - listitem [ref=f2e375]:
+            - generic [ref=f2e376]: Home Loans
+      - generic [ref=f2e378]:
+        - heading "Get In Touch" [level=3] [ref=f2e379]
+        - list [ref=f2e381]:
+          - listitem [ref=f2e382]:
+            - generic [ref=f2e386]: Gaya Vihar Colony, New Sarkanda, Sarkanda, Bilaspur, Chhattisgarh 495001
+          - listitem [ref=f2e387]:
+            - generic [ref=f2e390]: +91-9232525253
+          - listitem [ref=f2e391]:
+            - generic [ref=f2e395]: admin@visionvistar.com
+        - generic [ref=f2e396]:
+          - paragraph [ref=f2e397]: Subscribe to updates
+          - generic [ref=f2e398]:
+            - textbox "Your email" [ref=f2e399]
+            - button "Join" [ref=f2e400] [cursor=pointer]
+    - generic [ref=f2e402]:
+      - paragraph [ref=f2e403]: © 2026 Vision Vistara. All rights reserved.
+      - paragraph [ref=f2e404]: Made with in Chhattisgarh
+  - generic [ref=f2e407]:
+    - link:
+      - /url: https://wa.me/919232525253?text=Hi%20Vision%20Vistara%2C%20I%20am%20interested%20in%20your%20properties.
+    - link:
+      - /url: mailto:admin@visionvistar.com?subject=Property%20Inquiry&body=Hi%20Vision%20Vistara%2C%0A%0AI%20am%20interested%20in%20your%20properties.%20Please%20share%20details.
+  - button "Open Next.js Dev Tools" [ref=f2e413] [cursor=pointer]

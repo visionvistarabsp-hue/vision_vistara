@@ -240,7 +240,7 @@ export default function HomePage() {
       {/* Stats Section */}
       <section className="relative -mt-12 md:-mt-20 z-30 px-4">
         <FadeIn>
-          <Card className="max-w-5xl mx-auto">
+          <Card className="max-w-5xl mx-auto !bg-white">
             <CardContent className="p-4 md:p-8">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
                 {stats.map((stat, i) => (

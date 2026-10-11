@@ -26,12 +26,12 @@ const services = [
     icon: Building2,
     title: "Builders & Developers",
     description:
-      "We are a leading builders & developers company in Chhattisgarh offering comprehensive housing solutions for every need.",
+      "End-to-end sales and marketing solutions designed to help developers launch, position and sell their projects effectively",
     features: [
-      "Residential Projects",
-      "Commercial Complexes",
-      "Township Development",
-      "Infrastructure Projects",
+      "Build",
+      "Position",
+      "Sell",
+      "Scale",
     ],
     image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&h=600&fit=crop",
   },
@@ -110,15 +110,14 @@ export default function Services() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-4 mb-6 font-tech">
               <TypedText
                 segments={[
-                  { text: "Comprehensive " },
-                  { text: "Real Estate", className: "text-yellow-400" },
-                  { text: " Solutions" },
+                  { text: "Real Estate," },
+                  { text: "Simplified", className: "text-yellow-400" },
+                  
                 ]}
               />
             </h1>
             <p className="text-purple-100/80 text-lg max-w-2xl mx-auto">
-              From property consultancy to investment advisory, we offer a
-              complete range of real estate services tailored to your needs.
+              From project strategy and sales to property advisory and technology, Vision Vistara brings together the expertise and solutions needed to move real estate forward.
             </p>
           </FadeIn>
         </div>
@@ -155,7 +154,7 @@ export default function Services() {
                   </ul>
                   <Button variant="gradient" size="lg" asChild>
                     <Link href="/contact">
-                      Learn More
+                      Explore Developer Solutions
                       <ArrowRight size={16} className="ml-2" />
                     </Link>
                   </Button>
@@ -186,94 +185,23 @@ export default function Services() {
       </section>
 
       {/* Process Section */}
-      <section className="py-24 px-4 bg-purple-50">
-        <div className="max-w-7xl mx-auto">
-          <FadeIn>
-            <div className="text-center mb-16">
-              <Badge variant="yellow" className="mb-3">How We Work</Badge>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-3 font-tech">
-                Our <span className="text-purple-600">Process</span>
-              </h2>
-            </div>
-          </FadeIn>
 
-          <div className="relative">
-            <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-purple-200 -translate-y-1/2" />
-            <div className="grid md:grid-cols-5 gap-8">
-              {processSteps.map((step, i) => (
-                <FadeIn key={step.step} delay={i * 0.1}>
-                  <div className="relative text-center">
-                    <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 relative z-10 shadow-lg shadow-purple-500/30">
-                      <span className="text-white font-bold text-lg">
-                        {step.step}
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2 font-tech">
-                      {step.title}
-                    </h3>
-                    <p className="text-sm text-gray-500">{step.description}</p>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="py-24 px-4">
-        <div className="max-w-7xl mx-auto">
-          <FadeIn>
-            <div className="text-center mb-16">
-              <Badge variant="yellow" className="mb-3">Why Choose Us</Badge>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-3 font-tech">
-                The Vision Vistara{" "}
-                <span className="text-purple-600">Difference</span>
-              </h2>
-            </div>
-          </FadeIn>
-
-          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: Shield, title: "RERA Certified", description: "100% compliant with regulatory standards" },
-              { icon: MapPin, title: "Prime Locations", description: "Properties in Bilaspur's best areas" },
-              { icon: FileText, title: "Transparent Deals", description: "Clear documentation and honest pricing" },
-              { icon: Banknote, title: "Best Value", description: "Competitive prices with high ROI potential" },
-            ].map((item) => (
-              <StaggerItem key={item.title}>
-                <Card className="text-center p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                  <CardContent className="p-0">
-                    <div className="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                      <item.icon size={28} className="text-purple-600" />
-                    </div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2 font-tech">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm">{item.description}</p>
-                  </CardContent>
-                </Card>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-24 px-4 bg-gradient-to-r from-purple-600 to-purple-800">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-tech">
-              Ready to Start Your Property Journey?
+              Looking for the Right Real Estate Solution?
             </h2>
             <p className="text-purple-100/80 mb-8 max-w-2xl mx-auto">
-              Contact us today for a free consultation and let our experts guide
-              you to your perfect property.
+              Whether you're developing a project, looking for your next property, exploring an investment or looking to make your real estate business more technology-driven—we're here to help..
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button variant="yellow" size="xl" asChild>
                 <Link href="/contact">
                   <Phone size={18} className="mr-2" />
-                  Get Free Consultation
+                  Talk to Vision Vistara
                 </Link>
               </Button>
               <Button variant="outline" size="xl" asChild>

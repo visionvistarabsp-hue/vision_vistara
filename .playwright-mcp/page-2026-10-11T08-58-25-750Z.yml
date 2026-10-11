@@ -1,0 +1,193 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "Vision Vistara" [ref=e5]
+      - navigation [ref=e6]:
+        - link "Home" [ref=e7] [cursor=pointer]:
+          - /url: /
+        - link "About" [ref=e9] [cursor=pointer]:
+          - /url: /about
+        - link "Portfolio" [ref=e11] [cursor=pointer]:
+          - /url: /portfolio
+        - link "Services" [ref=e13] [cursor=pointer]:
+          - /url: /services
+        - link "Contact" [ref=e15] [cursor=pointer]:
+          - /url: /contact
+      - link "Get Free Consultation" [ref=e19] [cursor=pointer]:
+        - /url: /contact
+  - main [ref=e20]:
+    - generic [ref=e26]:
+      - generic [ref=e27]: Contact Us
+      - heading "Let’s Talk Real Estate." [level=1] [ref=e28]
+      - paragraph [ref=e31]: Whether you're looking to buy a property, explore an investment, develop a project, or build better real estate solutions with technology — we're here to help.
+    - generic [ref=e33]:
+      - generic [ref=e34]:
+        - generic [ref=e35]: How Can We Help?
+        - heading "Choose What You're Looking For:" [level=2] [ref=e36]
+        - paragraph [ref=e37]: Tell us who you are and we'll point you in the right direction.
+      - generic [ref=e38]:
+        - generic [ref=e41]:
+          - heading "I'm Looking to Buy" [level=3] [ref=e46]
+          - paragraph [ref=e47]: Browse our curated portfolio of premium properties and find your perfect home.
+          - link "Find a Property" [ref=e49] [cursor=pointer]:
+            - /url: /portfolio
+        - generic [ref=e54]:
+          - heading "I'm Looking to Invest" [level=3] [ref=e59]
+          - paragraph [ref=e60]: Explore high-return real estate opportunities with our investment team.
+          - link "Talk to an Advisor" [ref=e62] [cursor=pointer]:
+            - /url: /contact
+        - generic [ref=e66]:
+          - heading "I'm a Developer" [level=3] [ref=e73]
+          - paragraph [ref=e74]: Partner with us to bring your residential and commercial projects to life.
+          - link "Discuss Your Project" [ref=e76] [cursor=pointer]:
+            - /url: /contact
+        - generic [ref=e80]:
+          - heading "I'm Looking for Technology Solutions" [level=3] [ref=e85]
+          - paragraph [ref=e86]: Discover smart real estate technology built for the modern property market.
+          - generic [ref=e87]:
+            - button "Explore Technology" [disabled]
+            - generic [ref=e88]: Coming Soon
+    - generic [ref=e91]:
+      - generic [ref=e94]:
+        - heading "Visit Us" [level=3] [ref=e99]
+        - paragraph [ref=e100]: "Head Office : Nutan Chowk, Sarkanda, Bilaspur, CG 495001"
+        - paragraph [ref=e101]: "Branch Office : Beside Gulab nagar, mopka , bilaspur, CG 495001"
+      - generic [ref=e104]:
+        - heading "Call Us" [level=3] [ref=e108]
+        - paragraph [ref=e109]: +91-9232525253
+      - generic [ref=e112]:
+        - heading "Email Us" [level=3] [ref=e117]
+        - paragraph [ref=e118]: admin@visionvistar.com
+      - generic [ref=e121]:
+        - heading "Working Hours" [level=3] [ref=e126]
+        - paragraph [ref=e127]: "Mon - Sat: 9:00 AM - 7:00 PM"
+        - paragraph [ref=e128]: "Sunday: By Appointment"
+    - generic [ref=e131]:
+      - generic [ref=e134]:
+        - generic [ref=e139]:
+          - heading "Send Us a Message" [level=2] [ref=e140]
+          - paragraph [ref=e141]: We'll get back to you within 24 hours
+        - generic [ref=e142]:
+          - generic [ref=e143]:
+            - generic [ref=e144]:
+              - generic [ref=e145]: Full Name *
+              - textbox "Full Name *" [ref=e149]:
+                - /placeholder: John Doe
+            - generic [ref=e150]:
+              - generic [ref=e151]: Phone Number *
+              - textbox "Phone Number *" [ref=e154]:
+                - /placeholder: +91 9232525253
+          - generic [ref=e155]:
+            - generic [ref=e156]:
+              - generic [ref=e157]: Email Address
+              - textbox "Email Address" [ref=e161]:
+                - /placeholder: john@example.com
+            - generic [ref=e162]:
+              - generic [ref=e163]: Subject
+              - combobox "Subject" [ref=e167]:
+                - option "Select a subject" [selected]
+                - option "Property Inquiry"
+                - option "Sell My Property"
+                - option "Investment Inquiry"
+                - option "Free Consultation"
+                - option "Other"
+          - generic [ref=e168]:
+            - text: Your Message *
+            - textbox "Your Message *" [ref=e169]:
+              - /placeholder: Tell us about your requirements...
+          - button "Send Message" [ref=e170] [cursor=pointer]
+      - generic [ref=e175]:
+        - iframe [ref=e177]
+        - generic [ref=e179]:
+          - heading "Our Offices" [level=3] [ref=e180]
+          - generic [ref=e190]:
+            - paragraph [ref=e191]: Bilaspur (Head Office)
+            - paragraph [ref=e192]: Gaya Vihar Colony, New Sarkanda, Sarkanda, Bilaspur, CG 495001
+            - paragraph [ref=e193]: +91-9232525253
+        - generic [ref=e195]:
+          - heading "Need Immediate Assistance?" [level=3] [ref=e196]
+          - paragraph [ref=e197]: Call us directly or chat on WhatsApp for instant response
+          - generic [ref=e198]:
+            - link "Call Now" [ref=e199] [cursor=pointer]:
+              - /url: tel:+919232525253
+            - link "WhatsApp" [ref=e202] [cursor=pointer]:
+              - /url: https://wa.me/919232525253
+  - contentinfo [ref=e205]:
+    - generic [ref=e207]:
+      - generic [ref=e208]:
+        - link [ref=e209] [cursor=pointer]:
+          - /url: /
+          - img "Vision Vistara" [ref=e210]
+        - paragraph [ref=e211]: A premier real estate firm dedicated to delivering exceptional property solutions for residential, commercial, and investment needs, built on a foundation of trust and innovation.
+        - generic [ref=e212]:
+          - button [ref=e213] [cursor=pointer]
+          - button [ref=e216] [cursor=pointer]
+          - button [ref=e219] [cursor=pointer]
+      - generic [ref=e222]:
+        - heading "Quick Links" [level=3] [ref=e223]
+        - list [ref=e225]:
+          - listitem [ref=e226]:
+            - link "Home" [ref=e227] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e231]:
+            - link "About Us" [ref=e232] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e236]:
+            - link "Portfolio" [ref=e237] [cursor=pointer]:
+              - /url: /portfolio
+          - listitem [ref=e241]:
+            - link "Services" [ref=e242] [cursor=pointer]:
+              - /url: /services
+          - listitem [ref=e246]:
+            - link "For Investors" [ref=e247] [cursor=pointer]:
+              - /url: /investor
+          - listitem [ref=e251]:
+            - link "For Developers" [ref=e252] [cursor=pointer]:
+              - /url: /developer
+          - listitem [ref=e256]:
+            - link "For Buyers" [ref=e257] [cursor=pointer]:
+              - /url: /buyers
+          - listitem [ref=e261]:
+            - link "Contact" [ref=e262] [cursor=pointer]:
+              - /url: /contact
+      - generic [ref=e266]:
+        - heading "Our Services" [level=3] [ref=e267]
+        - list [ref=e269]:
+          - listitem [ref=e270]:
+            - generic [ref=e271]: Residential Properties
+          - listitem [ref=e273]:
+            - generic [ref=e274]: Commercial Properties
+          - listitem [ref=e276]:
+            - generic [ref=e277]: Investment Advisory
+          - listitem [ref=e279]:
+            - generic [ref=e280]: Property Management
+          - listitem [ref=e282]:
+            - generic [ref=e283]: Legal Consultation
+          - listitem [ref=e285]:
+            - generic [ref=e286]: Home Loans
+      - generic [ref=e288]:
+        - heading "Get In Touch" [level=3] [ref=e289]
+        - list [ref=e291]:
+          - listitem [ref=e292]:
+            - generic [ref=e296]: Gaya Vihar Colony, New Sarkanda, Sarkanda, Bilaspur, Chhattisgarh 495001
+          - listitem [ref=e297]:
+            - generic [ref=e300]: +91-9232525253
+          - listitem [ref=e301]:
+            - generic [ref=e305]: admin@visionvistar.com
+        - generic [ref=e306]:
+          - paragraph [ref=e307]: Subscribe to updates
+          - generic [ref=e308]:
+            - textbox "Your email" [ref=e309]
+            - button "Join" [ref=e310] [cursor=pointer]
+    - generic [ref=e312]:
+      - paragraph [ref=e313]: © 2026 Vision Vistara. All rights reserved.
+      - paragraph [ref=e314]: Made with in Chhattisgarh
+  - generic [ref=e317]:
+    - link [ref=e318] [cursor=pointer]:
+      - /url: https://wa.me/919232525253?text=Hi%20Vision%20Vistara%2C%20I%20am%20interested%20in%20your%20properties.
+    - link [ref=e321] [cursor=pointer]:
+      - /url: mailto:admin@visionvistar.com?subject=Property%20Inquiry&body=Hi%20Vision%20Vistara%2C%0A%0AI%20am%20interested%20in%20your%20properties.%20Please%20share%20details.
+  - button "Open Next.js Dev Tools" [ref=e330] [cursor=pointer]
+  - alert [ref=e334]
