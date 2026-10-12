@@ -93,7 +93,7 @@ const team = [
     name: "Kiyanshu Ratre",
     role: "Team Leader",
     category: "sales",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
+    image: "/images/kiyanshu_ratre.jpeg",
   },
   {
     name: "G K Yadav",
@@ -111,7 +111,7 @@ const team = [
     name: "Manish Yadav",
     role: "Team Leader",
     category: "sales",
-    image: "/images/sonu_thakur.png",
+    image: "/images/manish_yadav.png",
   },
   // Accountant
   {
