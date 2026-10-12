@@ -7,9 +7,6 @@ import Image from "next/image";
 import {
   ArrowRight,
   MapPin,
-  TrendingUp,
-  Shield,
-  Users,
   ChevronRight,
   Star,
   Phone,
@@ -488,6 +485,21 @@ export default function HomePage() {
               </StaggerItem>
             ))}
           </StaggerContainer>
+
+          <FadeIn>
+            <div className="text-center mt-12">
+              <Button variant="gradient" size="lg" asChild>
+                <a
+                  href="https://share.google/oaD430n6BLJYfZOQg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Read More Reviews
+                  <ArrowRight size={18} className="ml-2" />
+                </a>
+              </Button>
+            </div>
+          </FadeIn>
         </div>
       </section>
 

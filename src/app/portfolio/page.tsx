@@ -249,7 +249,7 @@ export default function Portfolio() {
               </a>
             </Button>
             <Button variant="yellow" size="xl" asChild className="ml-4">
-              <a href="/contact">
+              <a href="/site-visit">
                 Schedule a Site Visit
                 <ArrowRight size={18} className="ml-2" />
               </a>

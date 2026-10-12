@@ -69,7 +69,7 @@ const team = [
     name: "Nitesh Jesawal",
     role: "Team Leader",
     category: "sales",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
+    image: "/images/nitish_jesawal.jpeg",
   },
   {
     name: "Sumit Dubey",
@@ -125,7 +125,7 @@ const team = [
     name: "Nikhil Dubey",
     role: "Tech Lead",
     category: "tech",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+    image: "/images/nikhil_dubey.jpeg",
   },
   // Creative Team
   {
@@ -138,7 +138,7 @@ const team = [
     name: "Ayush Kori",
     role: "Creative Executive",
     category: "creative",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
+    image: "/images/ayush_kori.jpeg",
   },
 ];
 
@@ -468,7 +468,7 @@ Today, we are building Vision Vistara as a scalable real-estate platform — wit
                 {team.filter(m => m.category === "tech").map((member) => (
                   <motion.div key={member.name} whileHover={{ y: -3 }}>
                     <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
-                      <div className="relative h-32 overflow-hidden">
+                      <div className="relative aspect-square overflow-hidden">
                         <Image
                           src={member.image}
                           alt={member.name}
@@ -499,7 +499,7 @@ Today, we are building Vision Vistara as a scalable real-estate platform — wit
                 {team.filter(m => m.category === "accounts").map((member) => (
                   <motion.div key={member.name} whileHover={{ y: -3 }}>
                     <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
-                      <div className="relative h-32 overflow-hidden">
+                      <div className="relative aspect-square overflow-hidden">
                         <Image
                           src={member.image}
                           alt={member.name}

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, Phone, Mail, ArrowUpRight, Heart } from "lucide-react";
+import { MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
@@ -30,7 +30,7 @@ const quickLinks = [
   { name: "About Us", href: "/about" },
   { name: "Portfolio", href: "/portfolio" },
   { name: "Services", href: "/services" },
-
+  { name: "Book Site Visit", href: "/site-visit" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -65,14 +65,21 @@ export default function Footer() {
 We help developers, buyers and investors navigate real estate with the right guidance, execution and solutions.
             </p>
             <div className="flex gap-3">
-              {[FacebookIcon, InstagramIcon, LinkedinIcon].map((Icon, i) => (
+              {[
+                { Icon: FacebookIcon, href: "https://www.facebook.com/profile.php?id=61594248424976", label: "Facebook" },
+                { Icon: InstagramIcon, href: "https://www.instagram.com/vision.vistara", label: "Instagram" },
+                { Icon: LinkedinIcon, href: "https://www.linkedin.com/company/vision-vistara/", label: "LinkedIn" },
+              ].map(({ Icon, href, label }) => (
                 <Button
-                  key={i}
+                  key={label}
+                  asChild
                   variant="outline"
                   size="icon"
                   className="bg-purple-800 border-purple-800 hover:bg-yellow-400 hover:border-yellow-400 text-white hover:text-purple-900 rounded-lg transition-all duration-300 hover:scale-110"
                 >
-                  <Icon size={18} />
+                  <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
+                    <Icon size={18} />
+                  </a>
                 </Button>
               ))}
             </div>

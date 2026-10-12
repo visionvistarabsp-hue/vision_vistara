@@ -10,7 +10,6 @@ import {
   Clock,
   Send,
   CheckCircle,
-  Building2,
   MessageCircle,
   User,
   FileText,
@@ -50,10 +49,6 @@ const contactInfo = [
     title: "Working Hours",
     details: ["Open All Day: 9:00 AM – 7:00 PM", "Festival & Public Holidays: By Appointment Only"],
   },
-];
-
-const offices = [
-  { city: "Bilaspur (Head Office)", address: "Nutan Chowk, Sarkanda, Bilaspur, CG 495001", phone: "+91-9232525253" },
 ];
 
 const lookupCards = [
@@ -311,7 +306,7 @@ export default function Contact() {
                         <div className="space-y-2">
                           <Label htmlFor="contact-subject">
                             <FileText size={14} className="inline mr-1" />
-                            I'm Interested In
+                            I&apos;m Interested In
                           </Label>
                           <select
                             id="contact-subject"
