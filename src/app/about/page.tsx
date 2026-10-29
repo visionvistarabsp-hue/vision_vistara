@@ -365,9 +365,9 @@ Today, we are building Vision Vistara as a scalable real-estate platform — wit
 
           {/* Founder & CEO - Centered */}
           <div className="flex justify-center mb-10">
-            <motion.div whileHover={{ y: -5 }} className="w-56">
-              <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 border-purple-200">
-                <div className="relative h-56 overflow-hidden">
+            <motion.div whileHover={{ y: -3 }} className="w-60">
+              <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
+                <div className="relative aspect-square overflow-hidden">
                   <Image
                     src={team[0].image}
                     alt={team[0].name}
@@ -375,17 +375,21 @@ Today, we are building Vision Vistara as a scalable real-estate platform — wit
                     className="object-cover"
                     unoptimized
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 via-purple-900/20 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-3 text-center">
-                    <h3 className="text-base font-bold text-white font-tech">{team[0].name}</h3>
-                    <p className="text-yellow-400 font-semibold text-xs">{team[0].role}</p>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-2 text-center">
+                    <h3 className="text-[12px] font-bold text-white font-tech leading-tight">
+                      {team[0].name}
+                    </h3>
+                    <p className="text-yellow-400 text-[10px] mt-0.5">
+                      {team[0].role}
+                    </p>
                   </div>
                 </div>
               </Card>
             </motion.div>
           </div>
 
-          {/* Sales Team - Compact Grid */}
+          {/* Sales Team */}
           <FadeIn>
             <div className="text-center mb-5">
               <h3 className="text-lg font-bold text-gray-900 font-tech">
@@ -393,31 +397,59 @@ Today, we are building Vision Vistara as a scalable real-estate platform — wit
               </h3>
             </div>
           </FadeIn>
-          <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-3 mb-10">
-            {team.filter(m => m.category === "sales").map((member) => (
-              <motion.div key={member.name} whileHover={{ y: -3 }} className="w-full">
-                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
-                  <div className="relative aspect-square overflow-hidden">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      className="object-cover"
-                      unoptimized
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-                  <CardContent className="p-2 text-center">
-                    <h3 className="text-[11px] font-bold text-gray-900 font-tech leading-tight truncate">
-                      {member.name}
-                    </h3>
-                    <p className="text-purple-600 text-[9px] mt-0.5 truncate">
-                      {member.role}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+          <div className="flex flex-col items-center gap-3 mb-10">
+            <div className="flex flex-wrap justify-center gap-3 max-w-5xl">
+              {team.filter(m => m.category === "sales").slice(0, 5).map((member) => (
+                <motion.div key={member.name} whileHover={{ y: -3 }} className="w-40">
+                  <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
+                    <div className="relative aspect-square overflow-hidden">
+                      <Image
+                        src={member.image}
+                        alt={member.name}
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                    <CardContent className="p-2 text-center">
+                      <h3 className="text-[11px] font-bold text-gray-900 font-tech leading-tight truncate">
+                        {member.name}
+                      </h3>
+                      <p className="text-purple-600 text-[9px] mt-0.5 truncate">
+                        {member.role}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+            <div className="flex flex-wrap justify-center gap-3 max-w-4xl">
+              {team.filter(m => m.category === "sales").slice(5).map((member) => (
+                <motion.div key={member.name} whileHover={{ y: -3 }} className="w-40">
+                  <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
+                    <div className="relative aspect-square overflow-hidden">
+                      <Image
+                        src={member.image}
+                        alt={member.name}
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                    <CardContent className="p-2 text-center">
+                      <h3 className="text-[11px] font-bold text-gray-900 font-tech leading-tight truncate">
+                        {member.name}
+                      </h3>
+                      <p className="text-purple-600 text-[9px] mt-0.5 truncate">
+                        {member.role}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
           </div>
 
           {/* Creative Team - Like Sales */}
@@ -455,75 +487,45 @@ Today, we are building Vision Vistara as a scalable real-estate platform — wit
             ))}
           </div>
 
-          {/* Tech & Accounts - Side by Side */}
-          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            {/* Tech */}
-            <div>
-              <div className="text-center mb-3">
-                <h3 className="text-base font-bold text-gray-900 font-tech">
-                  Tech <span className="text-purple-600">Team</span>
-                </h3>
-              </div>
-              <div className="grid grid-cols-1 gap-3">
-                {team.filter(m => m.category === "tech").map((member) => (
-                  <motion.div key={member.name} whileHover={{ y: -3 }}>
-                    <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
-                      <div className="relative aspect-square overflow-hidden">
-                        <Image
-                          src={member.image}
-                          alt={member.name}
-                          fill
-                          className="object-cover"
-                          unoptimized
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                        <div className="absolute bottom-0 left-0 right-0 p-2 text-center">
-                          <h3 className="text-xs font-bold text-white font-tech">{member.name}</h3>
-                          <p className="text-yellow-400 text-[10px]">{member.role}</p>
-                        </div>
-                      </div>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
+          {/* Tech & Accounts - Like Creative Team */}
+          <FadeIn>
+            <div className="text-center mb-5 mt-10">
+              <h3 className="text-lg font-bold text-gray-900 font-tech">
+                Tech & <span className="text-purple-600">Accounts Team</span>
+              </h3>
             </div>
-
-            {/* Accounts */}
-            <div>
-              <div className="text-center mb-3">
-                <h3 className="text-base font-bold text-gray-900 font-tech">
-                  Accounts <span className="text-purple-600">Team</span>
-                </h3>
-              </div>
-              <div className="grid grid-cols-1 gap-3">
-                {team.filter(m => m.category === "accounts").map((member) => (
-                  <motion.div key={member.name} whileHover={{ y: -3 }}>
-                    <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
-                      <div className="relative aspect-square overflow-hidden">
-                        <Image
-                          src={member.image}
-                          alt={member.name}
-                          fill
-                          className="object-cover"
-                          unoptimized
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                        <div className="absolute bottom-0 left-0 right-0 p-2 text-center">
-                          <h3 className="text-xs font-bold text-white font-tech">{member.name}</h3>
-                          <p className="text-yellow-400 text-[10px]">{member.role}</p>
-                        </div>
-                      </div>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+          </FadeIn>
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-10 max-w-md mx-auto">
+            {team.filter(m => m.category === "tech" || m.category === "accounts").map((member) => (
+              <motion.div key={member.name} whileHover={{ y: -3 }} className="w-full">
+                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
+                  <div className="relative aspect-square overflow-hidden">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-2 text-center">
+                      <h3 className="text-[11px] font-bold text-white font-tech leading-tight">
+                        {member.name}
+                      </h3>
+                      <p className="text-yellow-400 text-[9px] mt-0.5">
+                        {member.role}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Stats */}
-      
+
     </>
   );
 }

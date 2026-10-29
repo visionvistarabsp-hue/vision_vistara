@@ -391,7 +391,7 @@ export default function Services() {
             className="object-cover"
             unoptimized
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-purple-950/85 via-purple-900/70 to-purple-950/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
         </div>
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center pt-28 pb-16">
           <FadeIn>
@@ -406,7 +406,7 @@ export default function Services() {
                 ]}
               />
             </h1>
-            <p className="text-purple-100/85 text-lg max-w-2xl mx-auto mb-8">
+            <p className="text-white/85 text-lg max-w-2xl mx-auto mb-8">
               From project strategy and sales to property advisory and
               technology, Vision Vistara brings together the expertise and
               solutions needed to move real estate forward.
