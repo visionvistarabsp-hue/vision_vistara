@@ -124,7 +124,7 @@ export default function Navbar() {
                 className="rounded-full px-6 bg-white text-purple-800 hover:bg-purple-100 shadow-lg shadow-purple-900/25"
                 asChild
               >
-                <Link href="/contact">Get Free Consultation</Link>
+                <Link href="/consultation">Get Free Consultation</Link>
               </Button>
             </div>
 
@@ -310,7 +310,7 @@ export default function Navbar() {
                   className="w-full bg-white text-purple-800 hover:bg-purple-100 shadow-xl shadow-purple-900/30 rounded-full py-6 text-base font-semibold"
                   asChild
                 >
-                  <Link href="/contact" onClick={() => setMenuOpen(false)}>
+                  <Link href="/consultation" onClick={() => setMenuOpen(false)}>
                     Get Free Consultation
                   </Link>
                 </Button>
