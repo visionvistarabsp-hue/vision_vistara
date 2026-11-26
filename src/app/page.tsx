@@ -1,7 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type PointerEvent,
+  type SyntheticEvent,
+} from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -19,15 +25,30 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { FadeIn, StaggerContainer, StaggerItem } from "@/components/Animations";
-import { TypedText } from "@/components/TypingText";
+import { CountUp, FadeIn } from "@/components/Animations";
 
 const stats = [
-  { number: "800+", label: "Happy Clients" },
-  { number: "8+", label: "Projects Completed" },
-  { number: "12+", label: "Years Experience" },
-  { number: "100%", label: "RERA Certified" },
+  { target: 800, suffix: "+", label: "Happy Clients" },
+  { target: 8, suffix: "+", label: "Projects Completed" },
+  { target: 12, suffix: "+", label: "Years Experience" },
+  { target: 100, suffix: "%", label: "RERA Certified" },
 ];
+
+const finePointerQuery = "(hover: hover) and (pointer: fine)";
+
+function subscribeToFinePointer(onChange: () => void) {
+  const mediaQuery = window.matchMedia(finePointerQuery);
+  mediaQuery.addEventListener("change", onChange);
+  return () => mediaQuery.removeEventListener("change", onChange);
+}
+
+function getFinePointerSnapshot() {
+  return window.matchMedia(finePointerQuery).matches;
+}
+
+function getServerFinePointerSnapshot() {
+  return false;
+}
 
 const projects = [
   {
@@ -140,93 +161,213 @@ const testimonials = [
   },
 ];
 
+function updatePointerTilt(event: PointerEvent<HTMLDivElement>, maxTilt: number) {
+  if (
+    event.pointerType !== "mouse" ||
+    !window.matchMedia("(hover: hover) and (pointer: fine)").matches ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    return;
+  }
+
+  const bounds = event.currentTarget.getBoundingClientRect();
+  if (!bounds.width || !bounds.height) {
+    return;
+  }
+
+  const offsetX = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
+  const offsetY = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
+  event.currentTarget.style.setProperty("--pointer-tilt-x", `${-offsetY * maxTilt}deg`);
+  event.currentTarget.style.setProperty("--pointer-tilt-y", `${offsetX * maxTilt}deg`);
+}
+
+function resetPointerTilt(event: PointerEvent<HTMLDivElement>) {
+  event.currentTarget.style.setProperty("--pointer-tilt-x", "0deg");
+  event.currentTarget.style.setProperty("--pointer-tilt-y", "0deg");
+}
+
 export default function HomePage() {
   const [selectedFeature, setSelectedFeature] = useState<string | null>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const supports3dEntrance = useSyncExternalStore(
+    subscribeToFinePointer,
+    getFinePointerSnapshot,
+    getServerFinePointerSnapshot,
+  );
+  const [activeHeroVideo, setActiveHeroVideo] = useState<0 | 1>(0);
+  const heroVideoRefs = [useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null)] as const;
+  const heroVideoCrossfadeRef = useRef(false);
+  const heroVideoParallaxRef = useRef<HTMLDivElement>(null);
+  const testimonialTrackRef = useRef<HTMLDivElement>(null);
+
+  const handleHeroPointerMove = (event: PointerEvent<HTMLElement>) => {
+    const videoLayer = heroVideoParallaxRef.current;
+    if (
+      !videoLayer ||
+      event.pointerType !== "mouse" ||
+      !window.matchMedia("(hover: hover) and (pointer: fine)").matches ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const offsetX = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const offsetY = (event.clientY - bounds.top) / bounds.height - 0.5;
+    videoLayer.style.setProperty("--hero-parallax-x", `${-offsetX * 8}px`);
+    videoLayer.style.setProperty("--hero-parallax-y", `${-offsetY * 6}px`);
+  };
+
+  const resetHeroParallax = () => {
+    const videoLayer = heroVideoParallaxRef.current;
+    videoLayer?.style.setProperty("--hero-parallax-x", "0px");
+    videoLayer?.style.setProperty("--hero-parallax-y", "0px");
+  };
+
+  const handleHeroVideoTimeUpdate = (
+    event: SyntheticEvent<HTMLVideoElement>,
+    videoIndex: 0 | 1,
+  ) => {
+    if (videoIndex !== activeHeroVideo) {
+      return;
+    }
+
+    const video = event.currentTarget;
+    if (video.currentTime < 1) {
+      heroVideoCrossfadeRef.current = false;
+      return;
+    }
+
+    if (
+      heroVideoCrossfadeRef.current ||
+      !Number.isFinite(video.duration) ||
+      video.duration - video.currentTime > 0.9
+    ) {
+      return;
+    }
+
+    const incomingVideo = heroVideoRefs[videoIndex === 0 ? 1 : 0].current;
+    if (!incomingVideo) {
+      return;
+    }
+
+    heroVideoCrossfadeRef.current = true;
+    incomingVideo.currentTime = 0;
+    void incomingVideo
+      .play()
+      .then(() => setActiveHeroVideo(videoIndex === 0 ? 1 : 0))
+      .catch((error: unknown) => {
+        heroVideoCrossfadeRef.current = false;
+        if (error instanceof DOMException && error.name === "AbortError") {
+          return;
+        }
+        console.error("Unable to start the hero video loop crossfade.", error);
+      });
+  };
 
   return (
     <>
-      {/* Hero Section - Fullscreen Video */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Hero Section - Fullscreen Editorial Video */}
+      <section
+        className="relative min-h-[720px] h-[100svh] max-h-[960px] overflow-hidden"
+        onPointerMove={handleHeroPointerMove}
+        onPointerLeave={resetHeroParallax}
+      >
         {/* Fullscreen Video Background */}
-        <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            poster="/images/hero-poster.jpg"
-            className="w-full h-full object-cover"
-          >
-            <source
-              src="https://assets.mixkit.co/videos/49843/49843-720.mp4"
-              type="video/mp4"
-            />
-          </video>
-          {/* Subtle gradient overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50" />
+        <div className="absolute inset-0 z-0 bg-black">
+          <div ref={heroVideoParallaxRef} className="hero-video-parallax">
+            {([0, 1] as const).map((videoIndex) => (
+              <video
+                key={videoIndex}
+                ref={heroVideoRefs[videoIndex]}
+                autoPlay={videoIndex === activeHeroVideo}
+                loop
+                muted
+                playsInline
+                preload="auto"
+                onTimeUpdate={(event) => handleHeroVideoTimeUpdate(event, videoIndex)}
+                onTransitionEnd={() => {
+                  if (videoIndex !== activeHeroVideo) {
+                    const video = heroVideoRefs[videoIndex].current;
+                    if (video) {
+                      video.pause();
+                      video.currentTime = 0;
+                    }
+                  }
+                }}
+                className={`hero-video-zoom hero-video-loop-frame absolute inset-0 h-full w-full object-cover object-center ${
+                  videoIndex === activeHeroVideo ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <source src="/video/vision_video.mp4" type="video/mp4" />
+              </video>
+            ))}
+          </div>
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,7,14,.82)_0%,rgba(10,7,14,.42)_48%,rgba(10,7,14,.12)_74%,rgba(10,7,14,.36)_100%)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/55" />
         </div>
 
-        {/* Center Content */}
-        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-          <FadeIn direction="up" delay={0.1}>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-wide font-tech">
-              <TypedText
-                segments={[
-                  { text: "Turning " },
-                  { text: "Vision", className: "text-yellow-400" },
-                  { text: " Into " },
-                  { text: "Assets", className: "text-yellow-400" },
-                ]}
-              />
-            </h1>
-          </FadeIn>
+        <div className="relative z-10 h-full max-w-[1440px] mx-auto px-5 sm:px-8 lg:px-14">
+          <div className="flex h-full items-center pb-24 pt-28 sm:pb-28 md:pb-32">
+            <div className="w-full max-w-[650px]">
+              <FadeIn className="hero-content-visible" direction="right" delay={0.05}>
+                <p className="mb-5 text-xs sm:text-sm font-medium uppercase tracking-[0.28em] text-white/75">
+                  Bilaspur real estate
+                </p>
+              </FadeIn>
 
-          <FadeIn direction="up" delay={0.2}>
-            <p className="text-white/80 text-sm sm:text-lg md:text-xl tracking-[0.2em] sm:tracking-[0.3em] uppercase mb-6 md:mb-8">
-              Better Properties. Smarter Decisions.
-            </p>
-          </FadeIn>
+              <FadeIn className="hero-content-visible" direction="right" delay={0.12}>
+                <h1 className="text-[clamp(3.25rem,7vw,6.5rem)] leading-[0.82] tracking-[-0.055em] text-white">
+                  <span className="block font-semibold">Start</span>
+                  <span className="mt-2 block font-cursive text-[1.12em] font-normal leading-[0.9] text-yellow-300">
+                    your future.
+                  </span>
+                </h1>
+              </FadeIn>
 
-          <FadeIn direction="up" delay={0.3}>
-            <div className="w-16 md:w-24 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto mb-6 md:mb-8" />
-          </FadeIn>
+              <FadeIn className="hero-content-visible" direction="right" delay={0.22}>
+                <p className="mt-7 max-w-[520px] text-sm sm:text-base leading-relaxed text-white/75">
+                  RERA-compliant homes and investment opportunities, guided by local
+                  expertise and complete transparency.
+                </p>
+              </FadeIn>
 
-          <FadeIn direction="up" delay={0.4}>
-            <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto mb-6 md:mb-10 leading-relaxed">
-              Discover RERA-compliant residential, commercial and investment
-              opportunities backed by local expertise, technology and transparent
-              guidance.
-            </p>
-          </FadeIn>
-
-          <FadeIn direction="up" delay={0.5}>
-            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-              <Button variant="yellow" size="lg" className="sm:size-xl" asChild>
-                <Link href="/portfolio">
-                  Explore Properties
-                  <ArrowRight size={18} className="ml-2" />
-                </Link>
-              </Button>
-              <Button variant="outline" size="lg" className="sm:size-xl bg-white/10 border-white/30 text-white hover:bg-white/20 backdrop-blur-sm" asChild>
-                <Link href="/contact">
-                  <Phone size={18} className="mr-2" />
-                  Talk to an Expert
-                </Link>
-              </Button>
+              <FadeIn className="hero-content-visible" direction="right" delay={0.32}>
+                <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                  <Button variant="yellow" size="xl" className="rounded-full" asChild>
+                    <Link href="/portfolio">
+                      Explore Properties
+                      <ArrowRight size={18} className="ml-2" />
+                    </Link>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="xl"
+                    className="rounded-full border-white/35 bg-white/10 text-white backdrop-blur-md hover:bg-white/20"
+                    asChild
+                  >
+                    <Link href="/contact">
+                      <Phone size={18} className="mr-2" />
+                      Talk to an Expert
+                    </Link>
+                  </Button>
+                </div>
+              </FadeIn>
             </div>
-          </FadeIn>
+          </div>
+
         </div>
 
         {/* Scroll Indicator */}
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={prefersReducedMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
+          transition={prefersReducedMotion ? { duration: 0 } : { delay: 1.5 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
         >
           <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
+            animate={prefersReducedMotion ? { y: 0 } : { y: [0, 10, 0] }}
+            transition={prefersReducedMotion ? { duration: 0 } : { duration: 1.5, repeat: Infinity }}
             className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center pt-2"
           >
             <div className="w-1 h-2 bg-white/60 rounded-full" />
@@ -237,27 +378,33 @@ export default function HomePage() {
       {/* Stats Section */}
       <section className="relative -mt-12 md:-mt-20 z-30 px-4">
         <FadeIn>
-          <Card className="max-w-5xl mx-auto !bg-white">
-            <CardContent className="p-4 md:p-8">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-                {stats.map((stat, i) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="text-center"
-                  >
-                    <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-purple-600 mb-1">
-                      {stat.number}
-                    </div>
-                    <div className="text-sm text-gray-500">{stat.label}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+          <div className="stats-panel-float">
+            <Card
+              onPointerMove={(event) => updatePointerTilt(event, 2)}
+              onPointerLeave={resetPointerTilt}
+              className="stats-panel-tilt max-w-5xl mx-auto !bg-white"
+            >
+              <CardContent className="p-4 md:p-8">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+                  {stats.map((stat, i) => (
+                    <motion.div
+                      key={stat.label}
+                      initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={prefersReducedMotion ? { duration: 0 } : { delay: i * 0.1 }}
+                      className="text-center"
+                    >
+                      <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-purple-700 mb-1">
+                        <CountUp target={stat.target} suffix={stat.suffix} />
+                      </div>
+                      <div className="text-sm text-gray-500">{stat.label}</div>
+                    </motion.div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </FadeIn>
       </section>
 
@@ -267,7 +414,7 @@ export default function HomePage() {
           <FadeIn>
             <div className="text-center mb-16">
               <Badge variant="yellow" className="mb-3">Why Choose Us</Badge>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-3 font-tech">
+              <h2 className="premium-heading text-3xl md:text-4xl font-bold text-gray-900 mt-3 font-tech">
                 Built For Every Side of{" "}
                 <span className="text-purple-600">Real Estate</span>
               </h2>
@@ -277,53 +424,116 @@ export default function HomePage() {
             </div>
           </FadeIn>
 
-          <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
-            {features.map((feature) => (
-              <StaggerItem key={feature.title}>
-                <Card className="group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border-white/60 h-full">
-                  <CardContent className="p-6">
-                    <div className="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-purple-600 transition-colors">
-                      <feature.icon
-                        size={28}
-                        className="text-purple-600 group-hover:text-white transition-colors"
-                      />
-                    </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2 font-tech">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm leading-relaxed mb-4">
-                      {feature.description}
-                    </p>
-                    <button
-                      onClick={() => setSelectedFeature(feature.title)}
-                      className="text-purple-600 text-sm font-semibold hover:text-purple-800 transition-colors flex items-center gap-1 group/btn"
+          <div
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto"
+            style={{ perspective: 1200 }}
+          >
+            {features.map((feature, index) => {
+              const isInvestor = index === 0;
+              const isBuyer = feature.title === "Buyer";
+              const finalPosition = {
+                opacity: 1,
+                x: "0%",
+                y: "0%",
+                z: 0,
+                scale: 1,
+                rotateX: 0,
+                rotateY: 0,
+              };
+              const initialPosition = {
+                opacity: 0,
+                x: isBuyer ? "0%" : isInvestor ? "-175%" : "175%",
+                y: isBuyer ? "0%" : "-150%",
+                z: supports3dEntrance ? (isBuyer ? -140 : -320) : 0,
+                scale: isBuyer ? 0.92 : 0.68,
+                rotateX: supports3dEntrance ? (isBuyer ? 8 : 22) : 0,
+                rotateY: supports3dEntrance
+                  ? isInvestor
+                    ? 18
+                    : isBuyer
+                      ? 0
+                      : -18
+                  : 0,
+              };
+
+              return (
+                <motion.div
+                  key={`${feature.title}-${supports3dEntrance ? "3d" : "flat"}`}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.25 }}
+                  className="h-full"
+                >
+                  <motion.div
+                    variants={{
+                      hidden: prefersReducedMotion ? finalPosition : initialPosition,
+                      visible: finalPosition,
+                    }}
+                    transition={{
+                      duration: prefersReducedMotion ? 0 : 0.9,
+                      delay: prefersReducedMotion ? 0 : index * 0.17,
+                      ease: "easeOut",
+                    }}
+                    style={{
+                      transformStyle: "preserve-3d",
+                      transformOrigin: isBuyer
+                        ? "center center"
+                        : isInvestor
+                          ? "left top"
+                          : "right top",
+                    }}
+                    className="h-full"
+                  >
+                    <Card
+                      onPointerMove={(event) => updatePointerTilt(event, 3)}
+                      onPointerLeave={resetPointerTilt}
+                      className="group feature-card-tilt hover:shadow-xl transition-all duration-300 border-white/60 h-full"
                     >
-                      Explore More
-                      <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
-                  </CardContent>
-                </Card>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+                      <CardContent className="p-6">
+                        <div className="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-purple-600 transition-colors">
+                          <feature.icon
+                            size={28}
+                            className="feature-icon-motion text-purple-600 group-hover:text-white transition-colors"
+                          />
+                        </div>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2 font-tech">
+                          {feature.title}
+                        </h3>
+                        <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                          {feature.description}
+                        </p>
+                        <button
+                          onClick={() => setSelectedFeature(feature.title)}
+                          className="text-purple-600 text-sm font-semibold hover:text-purple-800 transition-colors flex items-center gap-1 group/btn"
+                        >
+                          Explore More
+                          <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
+                        </button>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
       {/* Projects Section */}
-      <section className="py-16 md:py-24 px-4 bg-purple-50">
+      <section className="py-16 md:py-24 px-4 bg-[#F4EFE8] dark:bg-[#18171C]">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-12">
+            <div className="flex items-end justify-between mb-8 md:mb-10">
               <div>
-                <Badge variant="yellow" className="mb-3">Featured Projects</Badge>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-3 font-tech">
-                  Explore Our <span className="text-purple-600">Projects</span>
-                </h2>
-                <p className="text-gray-500 mt-3 text-sm md:text-base max-w-xl">
-                  Discover thoughtfully developed residential and commercial spaces designed for living, working and investing.
+                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-purple-700 dark:text-yellow-400">
+                  Featured projects
                 </p>
+                <h2 className="premium-heading text-4xl md:text-6xl leading-none text-gray-900 dark:text-white">
+                  <span className="block font-semibold">What</span>
+                  <span className="block font-cursive text-purple-600">we build.</span>
+                </h2>
               </div>
-              <Button variant="ghost" className="mt-4 md:mt-0 text-purple-600 hover:text-purple-700" asChild>
+              <Button variant="ghost" className="mb-1 text-gray-900 hover:text-purple-700 dark:text-white dark:hover:text-yellow-300" asChild>
                 <Link href="/portfolio">
                   View All Projects
                   <ArrowRight size={18} className="ml-2" />
@@ -332,62 +542,103 @@ export default function HomePage() {
             </div>
           </FadeIn>
 
-          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {projects.map((project) => (
-              <StaggerItem key={project.id}>
-                <motion.div whileHover={{ y: -10 }}>
-                  <Card className="group overflow-hidden hover:shadow-2xl transition-all duration-300">
-                    <div className="relative h-64 overflow-hidden bg-gray-100">
-                      <Image
-                        src={project.image}
-                        alt={project.name}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        unoptimized
-                      />
-                      <div className="absolute top-4 left-4">
-                        <Badge className="bg-yellow-400/60 text-yellow-900 backdrop-blur-sm border-yellow-500/20 hover:bg-yellow-400/70">{project.type}</Badge>
-                      </div>
-                      <div className="absolute top-4 right-4">
-                        <Badge className="bg-purple-600/60 text-white backdrop-blur-sm border-purple-500/20 hover:bg-purple-600/70">RERA Registered</Badge>
-                      </div>
-                    </div>
-                    <CardContent className="p-6">
-                      <p className="text-xs text-purple-600 font-semibold uppercase tracking-wider mb-1">Residential</p>
-                      <h3 className="text-xl font-bold text-gray-900 mb-1 font-tech">
-                        {project.name}
-                      </h3>
-                      {project.tagline && (
-                        <p className="text-xs text-gray-400 italic mb-2">{project.tagline}</p>
-                      )}
-                      <div className="flex items-center gap-2 text-gray-500 text-sm mb-3">
-                        <MapPin size={14} className="text-purple-500" />
-                        {project.location}
-                      </div>
-                      <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                        <div className="flex items-center gap-4">
-                          <span className="flex items-center gap-1.5 text-sm text-gray-600 font-medium">
-                            <HomeIcon size={14} className="text-purple-500" />
-                            {project.bhk}
-                          </span>
-                          <span className="flex items-center gap-1.5 text-sm text-gray-600 font-medium">
-                            <Layers size={14} className="text-purple-500" />
-                            {project.units}
+          <div className="grid lg:grid-cols-[1.55fr_.75fr] gap-5 md:gap-6">
+            {projects.map((project, index) => {
+              const initialPosition = prefersReducedMotion
+                ? { opacity: 1, x: 0, scale: 1 }
+                : {
+                    opacity: 0,
+                    x: index === 0 ? -64 : index === 2 ? 64 : 0,
+                    scale: index === 1 ? 0.97 : 0.98,
+                  };
+
+              return (
+                <motion.div
+                  key={project.id}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.25 }}
+                  className={index === 0 ? "lg:row-span-2" : ""}
+                >
+                  <motion.div
+                    className="project-card-entrance"
+                    variants={{
+                      hidden: initialPosition,
+                      visible: { opacity: 1, x: 0, scale: 1 },
+                    }}
+                    transition={{
+                      duration: prefersReducedMotion ? 0 : 1.05,
+                      delay: prefersReducedMotion ? 0 : index * 0.18,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                  >
+                    <Card
+                      onPointerMove={(event) => updatePointerTilt(event, 1.5)}
+                      onPointerLeave={resetPointerTilt}
+                      className={`group project-card-motion relative h-[280px] md:h-[320px] overflow-hidden border-0 bg-gray-900 shadow-xl ${
+                        index === 0 ? "lg:h-[526px]" : "lg:h-[250px]"
+                      }`}
+                    >
+                      <div className="absolute inset-0">
+                        <Image
+                          src={project.image}
+                          alt={project.name}
+                          fill
+                          className="project-image-motion object-cover transition-transform duration-700"
+                          unoptimized
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/10" />
+                        <div className="absolute inset-x-0 top-0 flex items-center justify-between p-5 md:p-6">
+                          <Badge className="bg-purple-600/70 text-white backdrop-blur-md border-purple-400/20">
+                            {project.type}
+                          </Badge>
+                          <span className="font-cursive text-2xl text-white/90">
+                            {String(index + 1).padStart(2, "0")}
+                            <span className="text-sm text-white/50">/{String(projects.length).padStart(2, "0")}</span>
                           </span>
                         </div>
-                        <Button variant="ghost" size="sm" className="text-purple-600 hover:text-yellow-500 p-0" asChild>
-                          <Link href="/contact">
-                            View Project
-                            <ChevronRight size={14} className="ml-1" />
-                          </Link>
-                        </Button>
+                        <CardContent className="absolute inset-x-0 bottom-0 p-5 md:p-6">
+                          <div className="border-l border-yellow-400/70 pl-4">
+                            <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60">
+                              Residential
+                            </p>
+                            <h3 className={`font-cursive font-normal text-white ${index === 0 ? "text-3xl md:text-5xl" : "text-2xl md:text-3xl"}`}>
+                              {project.name}
+                            </h3>
+                          </div>
+                          <div className="mt-4 flex items-end justify-between">
+                            <div>
+                              <div className="flex items-center gap-2 text-xs md:text-sm text-white/75">
+                                <MapPin size={13} className="text-yellow-400" />
+                                {project.location}
+                              </div>
+                              {index === 0 && (
+                                <div className="mt-3 hidden sm:flex items-center gap-5 text-xs text-white/75">
+                                  <span className="flex items-center gap-1.5">
+                                    <HomeIcon size={13} className="text-yellow-400" />
+                                    {project.bhk}
+                                  </span>
+                                  <span className="flex items-center gap-1.5">
+                                    <Layers size={13} className="text-yellow-400" />
+                                    {project.units}
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+                            <Button variant="ghost" size="sm" className="rounded-full border border-white/20 bg-white/10 text-white hover:bg-white/20 p-2" asChild>
+                              <Link href="/contact" aria-label={`View ${project.name}`}>
+                                <ChevronRight size={16} />
+                              </Link>
+                            </Button>
+                          </div>
+                        </CardContent>
                       </div>
-                    </CardContent>
-                  </Card>
+                    </Card>
+                  </motion.div>
                 </motion.div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -442,7 +693,12 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-16 md:py-24 px-4 bg-purple-50">
+      <motion.section
+        className="py-16 md:py-24 px-4 bg-purple-50"
+        onViewportEnter={() => testimonialTrackRef.current?.classList.add("is-visible")}
+        onViewportLeave={() => testimonialTrackRef.current?.classList.remove("is-visible")}
+        viewport={{ amount: 0.1 }}
+      >
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <div className="text-center mb-16">
@@ -453,38 +709,55 @@ export default function HomePage() {
             </div>
           </FadeIn>
 
-          <StaggerContainer className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-            {testimonials.map((testimonial) => (
-              <StaggerItem key={testimonial.name}>
-                <Card className="hover:shadow-xl transition-shadow h-full">
-                  <CardContent className="p-5 md:p-8">
-                    <div className="flex gap-1 mb-4">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star
-                          key={i}
-                          size={18}
-                          className="fill-yellow-400 text-yellow-400"
-                        />
-                      ))}
+          <div className="testimonial-marquee">
+            <div
+              ref={testimonialTrackRef}
+              className="testimonial-marquee__track"
+            >
+              {[false, true].map((isDuplicate) => (
+                <div
+                  key={isDuplicate ? "duplicate-testimonials" : "testimonials"}
+                  className="testimonial-marquee__group"
+                  aria-hidden={isDuplicate}
+                  inert={isDuplicate}
+                >
+                  {testimonials.map((testimonial) => (
+                    <div
+                      key={testimonial.name}
+                      className="testimonial-marquee__item"
+                    >
+                      <Card className="hover:shadow-xl transition-shadow h-full">
+                        <CardContent className="p-5 md:p-8">
+                          <div className="flex gap-1 mb-4">
+                            {[...Array(testimonial.rating)].map((_, i) => (
+                              <Star
+                                key={i}
+                                size={18}
+                                className="fill-yellow-400 text-yellow-400"
+                              />
+                            ))}
+                          </div>
+                          <p className="text-gray-600 mb-6 leading-relaxed">
+                            &ldquo;{testimonial.text}&rdquo;
+                          </p>
+                          <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                              <span className="text-purple-600 font-semibold text-sm">
+                                {testimonial.name[0]}
+                              </span>
+                            </div>
+                            <span className="font-medium text-gray-900">
+                              {testimonial.name}
+                            </span>
+                          </div>
+                        </CardContent>
+                      </Card>
                     </div>
-                    <p className="text-gray-600 mb-6 leading-relaxed">
-                      &ldquo;{testimonial.text}&rdquo;
-                    </p>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-                        <span className="text-purple-600 font-semibold text-sm">
-                          {testimonial.name[0]}
-                        </span>
-                      </div>
-                      <span className="font-medium text-gray-900">
-                        {testimonial.name}
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
 
           <FadeIn>
             <div className="text-center mt-12">
@@ -501,7 +774,7 @@ export default function HomePage() {
             </div>
           </FadeIn>
         </div>
-      </section>
+      </motion.section>
 
       {/* Feature Detail Modal */}
       <AnimatePresence>

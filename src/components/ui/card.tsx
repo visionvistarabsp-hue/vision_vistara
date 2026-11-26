@@ -8,8 +8,8 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "relative rounded-2xl border border-white/50 bg-white/60 backdrop-blur-xl",
-      "shadow-[0_2px_12px_rgba(88,44,155,0.06),0_10px_36px_rgba(88,44,155,0.12)]",
+      "relative rounded-[1.25rem] border border-purple-100/80 bg-card text-card-foreground",
+      "shadow-[0_8px_30px_rgba(58,30,92,0.08)]",
       "before:absolute before:inset-x-0 before:top-0 before:h-px",
       "before:bg-gradient-to-r before:from-transparent before:via-white/80 before:to-transparent",
       "transition-all duration-300",

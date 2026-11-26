@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
@@ -43,11 +44,19 @@ const services = [
 ];
 
 export default function Footer() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <footer className="bg-gradient-to-b from-purple-900 to-purple-950 text-white">
+    <motion.footer
+      className="footer-reveal bg-[linear-gradient(145deg,#16131c_0%,#2d0a5e_58%,#1a0636_100%)] text-white"
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.05 }}
+      transition={{ duration: prefersReducedMotion ? 0 : 0.75, ease: "easeOut" }}
+    >
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-start gap-12">
           {/* Company Info */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center gap-3">
@@ -75,7 +84,7 @@ We help developers, buyers and investors navigate real estate with the right gui
                   asChild
                   variant="outline"
                   size="icon"
-                  className="bg-purple-800 border-purple-800 hover:bg-yellow-400 hover:border-yellow-400 text-white hover:text-purple-900 rounded-lg transition-all duration-300 hover:scale-110"
+                  className="footer-social-button bg-purple-800 border-purple-800 hover:bg-yellow-400 hover:border-yellow-400 text-white hover:text-purple-900 rounded-lg transition-all duration-300 hover:scale-110"
                 >
                   <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
                     <Icon size={18} />
@@ -87,8 +96,8 @@ We help developers, buyers and investors navigate real estate with the right gui
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 flex items-center gap-2 font-tech">
-              <div className="w-8 h-1 bg-yellow-400 rounded-full"></div>
+            <h3 className="footer-heading text-lg font-semibold mb-6 flex items-center gap-2 font-tech">
+              <div className="footer-heading-accent w-8 h-1 bg-yellow-400 rounded-full"></div>
               Quick Links
             </h3>
             <ul className="space-y-3">
@@ -96,11 +105,11 @@ We help developers, buyers and investors navigate real estate with the right gui
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-purple-200 hover:text-yellow-400 transition-colors flex items-center gap-2 group text-sm"
+                    className="footer-link-motion text-purple-200 hover:text-yellow-400 transition-colors flex items-center gap-2 group text-sm"
                   >
                     <ArrowUpRight
                       size={14}
-                      className="opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     />
                     {link.name}
                   </Link>
@@ -111,14 +120,14 @@ We help developers, buyers and investors navigate real estate with the right gui
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 flex items-center gap-2 font-tech">
-              <div className="w-8 h-1 bg-yellow-400 rounded-full"></div>
+            <h3 className="footer-heading text-lg font-semibold mb-6 flex items-center gap-2 font-tech">
+              <div className="footer-heading-accent w-8 h-1 bg-yellow-400 rounded-full"></div>
               Our Services
             </h3>
             <ul className="space-y-3">
               {services.map((service) => (
                 <li key={service}>
-                  <span className="text-purple-200 text-sm flex items-center gap-2">
+                  <span className="footer-service-motion text-purple-200 text-sm flex items-center gap-2">
                     <span className="w-1.5 h-1.5 bg-yellow-400 rounded-full"></span>
                     {service}
                   </span>
@@ -129,22 +138,22 @@ We help developers, buyers and investors navigate real estate with the right gui
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 flex items-center gap-2 font-tech">
-              <div className="w-8 h-1 bg-yellow-400 rounded-full"></div>
+            <h3 className="footer-heading text-lg font-semibold mb-6 flex items-center gap-2 font-tech">
+              <div className="footer-heading-accent w-8 h-1 bg-yellow-400 rounded-full"></div>
               Get In Touch
             </h3>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3">
+              <li className="footer-contact-item flex items-start gap-3">
                 <MapPin size={18} className="text-yellow-400 mt-1 shrink-0" />
                 <span className="text-purple-200 text-sm">
                    Nutan Chowk, Sarkanda, Bilaspur, CG 495001
                 </span>
               </li>
-              <li className="flex items-center gap-3">
+              <li className="footer-contact-item flex items-center gap-3">
                 <Phone size={18} className="text-yellow-400 shrink-0" />
                 <span className="text-purple-200 text-sm">+91-9232525253</span>
               </li>
-              <li className="flex items-center gap-3">
+              <li className="footer-contact-item flex items-center gap-3">
                 <Mail size={18} className="text-yellow-400 shrink-0" />
                 <span className="text-purple-200 text-sm">
                   admin@visionvistara.com
@@ -159,9 +168,9 @@ We help developers, buyers and investors navigate real estate with the right gui
                 <Input
                   type="email"
                   placeholder="Your email"
-                  className="bg-purple-800 border-purple-700 text-white placeholder:text-purple-400 focus-visible:ring-yellow-400"
+                  className="footer-newsletter-input bg-purple-800 border-purple-700 text-white placeholder:text-purple-400 focus-visible:ring-yellow-400"
                 />
-                <Button variant="yellow" size="default">
+                <Button variant="yellow" size="default" className="footer-newsletter-button">
                   Join
                 </Button>
               </div>
@@ -182,6 +191,6 @@ We help developers, buyers and investors navigate real estate with the right gui
           </p>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }

@@ -6,7 +6,6 @@ import {
   Phone,
   Mail,
   User,
-  Building2,
   CalendarClock,
   FileText,
   Send,
@@ -114,7 +113,7 @@ export default function Consultation() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[560px] h-[72svh] max-h-[760px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <video
             autoPlay
@@ -128,7 +127,7 @@ export default function Consultation() {
               type="video/mp4"
             />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(26,6,54,.82)_0%,rgba(26,6,54,.45)_48%,rgba(26,6,54,.18)_100%)]" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <FadeIn>

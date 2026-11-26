@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState, type PointerEvent } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
   MapPin,
   Square,
@@ -77,8 +77,35 @@ function getStatusVariant(status: string): "green" | "blue" | "orange" {
   return "orange";
 }
 
+function updatePointerTilt(event: PointerEvent<HTMLDivElement>, maxTilt: number) {
+  if (
+    event.pointerType !== "mouse" ||
+    !window.matchMedia("(hover: hover) and (pointer: fine)").matches ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    return;
+  }
+
+  const bounds = event.currentTarget.getBoundingClientRect();
+  if (!bounds.width || !bounds.height) {
+    return;
+  }
+
+  const offsetX = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
+  const offsetY = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
+  event.currentTarget.style.setProperty("--pointer-tilt-x", `${-offsetY * maxTilt}deg`);
+  event.currentTarget.style.setProperty("--pointer-tilt-y", `${offsetX * maxTilt}deg`);
+}
+
+function resetPointerTilt(event: PointerEvent<HTMLDivElement>) {
+  event.currentTarget.style.setProperty("--pointer-tilt-x", "0deg");
+  event.currentTarget.style.setProperty("--pointer-tilt-y", "0deg");
+}
+
 export default function Portfolio() {
   const [activeCategory, setActiveCategory] = useState("all");
+  const prefersReducedMotion = useReducedMotion();
+  const seenProjectIds = useRef(new Set<number>());
 
   const filteredProjects =
     activeCategory === "all"
@@ -88,7 +115,7 @@ export default function Portfolio() {
   return (
     <>
       {/* Hero Section - Video Background */}
-      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[560px] h-[72svh] max-h-[760px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <video
             autoPlay
@@ -102,7 +129,7 @@ export default function Portfolio() {
               type="video/mp4"
             />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(26,6,54,.82)_0%,rgba(26,6,54,.45)_48%,rgba(26,6,54,.18)_100%)]" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <FadeIn>
@@ -123,7 +150,7 @@ export default function Portfolio() {
       </section>
 
       {/* Filter Section */}
-      <section className="sticky top-20 z-40 bg-white/95 backdrop-blur-md border-b">
+      <section className="sticky top-20 z-40 border-b border-purple-200/70 bg-[#F4EFE8]/95 backdrop-blur-md dark:border-white/10 dark:bg-[#21162C]/95">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap md:justify-center md:gap-3">
             {categories.map((cat) => (
@@ -148,77 +175,95 @@ export default function Portfolio() {
       </section>
 
       {/* Projects Grid */}
-      <section className="py-16 px-4">
+      <section className="bg-[#F4EFE8] px-4 py-16 dark:bg-[#18171C]">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">
-            <p className="text-gray-500">
-              Showing <span className="font-semibold text-purple-600">{filteredProjects.length}</span> projects
+            <p className="text-gray-600 dark:text-gray-300">
+              Showing <span className="font-semibold text-purple-700 dark:text-purple-300">{filteredProjects.length}</span> projects
             </p>
           </div>
 
-          <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div layout className="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
             <AnimatePresence mode="popLayout">
-              {filteredProjects.map((project) => (
+              {filteredProjects.map((project, index) => {
+                const position = index % 3;
+                const initialPosition = prefersReducedMotion
+                  ? false
+                  : seenProjectIds.current.has(project.id)
+                    ? false
+                    : position === 1
+                      ? { opacity: 0, scale: 0.97 }
+                      : { opacity: 0, x: position === 0 ? -64 : 64, scale: 0.98 };
+
+                return (
                 <motion.div
                   key={project.id}
                   layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
+                  initial={initialPosition}
+                  whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                  onViewportEnter={() => seenProjectIds.current.add(project.id)}
+                  viewport={{ once: true, amount: 0.15 }}
+                  exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
+                  transition={{
+                    duration: prefersReducedMotion ? 0 : 1.05,
+                    delay: prefersReducedMotion ? 0 : index * 0.18,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="h-full"
                 >
-                  <Card className="group overflow-hidden hover:shadow-2xl transition-all duration-300 h-full">
-                    <div className="relative h-72 overflow-hidden bg-gray-100">
+                  <Card
+                    onPointerMove={(event) => updatePointerTilt(event, 1.5)}
+                    onPointerLeave={resetPointerTilt}
+                    className="group project-card-motion flex h-full flex-col overflow-hidden border border-purple-200/70 bg-white shadow-[0_12px_36px_rgba(33,22,44,0.08)] transition-[border-color,box-shadow] duration-300 hover:border-purple-400/70 hover:shadow-[0_20px_44px_rgba(33,22,44,0.16)] dark:border-[#49382D]/70 dark:bg-[#25252B] dark:shadow-[0_14px_38px_rgba(0,0,0,0.22)] dark:hover:border-yellow-400/35 dark:hover:shadow-[0_20px_46px_rgba(0,0,0,0.32)]"
+                  >
+                    <div className="relative h-[260px] shrink-0 overflow-hidden bg-gray-100 sm:h-[280px]">
                       <Image
                         src={project.image}
                         alt={project.name}
                         fill
-                        className="object-contain group-hover:scale-105 transition-transform duration-500"
+                        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                        className="project-image-motion portfolio-project-image object-cover transition-transform duration-700 ease-out"
                         unoptimized
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                      <div className="absolute top-4 left-4 flex gap-2">
-                        <Badge variant="yellow">{project.type}</Badge>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/20" />
+                      <div className="absolute inset-x-0 top-0 flex items-start justify-between gap-3 p-4">
+                        <Badge variant="purple" className="border border-white/15 bg-purple-700/90 shadow-sm backdrop-blur-sm">
+                          {project.type}
+                        </Badge>
                         <Badge variant={getStatusVariant(project.status)}>
                           {project.status}
                         </Badge>
                       </div>
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <Card className="bg-white/95 backdrop-blur-sm border-0">
-                          <CardContent className="p-4">
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <p className="text-sm text-gray-500">Starting from</p>
-                                <p className="text-xl font-bold text-purple-600">
-                                  {project.price}
-                                </p>
-                              </div>
-                              <Button variant="default" size="sm">
-                                View Details
-                              </Button>
-                            </div>
-                          </CardContent>
-                        </Card>
+                      <div className="absolute inset-x-5 bottom-4 flex items-end justify-between gap-3">
+                        <div className="min-w-0">
+                          <p className="text-xs font-medium uppercase tracking-[0.16em] text-white/70">Starting from</p>
+                          <p className="mt-1 text-lg font-semibold leading-tight text-white sm:text-xl">
+                            {project.price}
+                          </p>
+                        </div>
+                        <Button variant="yellow" size="sm" className="shrink-0 rounded-full px-4 shadow-none">
+                          View Details
+                        </Button>
                       </div>
                     </div>
 
-                    <CardContent className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2 font-tech">
+                    <CardContent className="flex flex-1 flex-col p-5 sm:p-6">
+                      <h3 className="mb-2 font-tech text-xl font-bold text-gray-900 dark:text-white">
                         {project.name}
                       </h3>
-                      <div className="flex items-center gap-2 text-gray-500 text-sm mb-4">
-                        <MapPin size={14} className="text-purple-500" />
+                      <div className="mb-4 flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+                        <MapPin size={14} className="shrink-0 text-purple-600 dark:text-purple-300" />
                         {project.location}
                       </div>
-                      <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
-                        <div className="flex items-center gap-1">
-                          <Square size={14} className="text-purple-500" />
+                      <div className="mb-4 flex items-center gap-2 border-t border-purple-100 pt-4 text-sm text-gray-700 dark:border-white/10 dark:text-gray-200">
+                        <div className="flex items-center gap-2">
+                          <Square size={14} className="shrink-0 text-yellow-600 dark:text-yellow-400" />
                           {project.area}
                         </div>
                       </div>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="mt-auto flex flex-wrap gap-2">
                         {project.features.map((feature) => (
-                          <Badge key={feature} variant="secondary" className="text-xs">
+                          <Badge key={feature} variant="secondary" className="border border-purple-100 bg-purple-50 text-xs text-purple-900 dark:border-[#49382D]/60 dark:bg-[#30251F] dark:text-[#e4d2b7]">
                             {feature}
                           </Badge>
                         ))}
@@ -226,34 +271,39 @@ export default function Portfolio() {
                     </CardContent>
                   </Card>
                 </motion.div>
-              ))}
+                );
+              })}
             </AnimatePresence>
           </motion.div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-4 bg-gradient-to-r from-purple-600 to-purple-800">
+      <section className="bg-[#E9DDF5] px-4 py-20 dark:bg-[linear-gradient(180deg,#18171C_0%,#21162C_100%)] md:py-24">
         <div className="max-w-4xl mx-auto text-center">
           <FadeIn>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-tech">
-              Found a Project You Like?
-            </h2>
-            <p className="text-purple-100/80 mb-8 max-w-2xl mx-auto">
-             Let’s help you take the next step.
-            </p>
-            <Button variant="yellow" size="xl" asChild>
-              <a href="/contact">
-                Talk to Our Team
-                <ArrowRight size={18} className="ml-2" />
-              </a>
-            </Button>
-            <Button variant="yellow" size="xl" asChild className="ml-4">
-              <a href="/site-visit">
-                Schedule a Site Visit
-                <ArrowRight size={18} className="ml-2" />
-              </a>
-            </Button>
+            <div className="rounded-[2rem] border border-purple-200/70 bg-white/75 px-6 py-10 shadow-[0_18px_48px_rgba(33,22,44,0.08)] backdrop-blur-sm dark:border-[#49382D]/60 dark:bg-[#25252B]/80 dark:shadow-[0_18px_48px_rgba(0,0,0,0.2)] sm:px-10 md:py-14">
+              <h2 className="mb-6 font-tech text-3xl font-bold text-gray-900 dark:text-white md:text-4xl">
+                Found a Project You Like?
+              </h2>
+              <p className="mx-auto mb-8 max-w-2xl text-gray-600 dark:text-gray-300">
+                Let’s help you take the next step.
+              </p>
+              <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
+                <Button variant="yellow" size="xl" asChild>
+                  <a href="/contact">
+                    Talk to Our Team
+                    <ArrowRight size={18} className="ml-2" />
+                  </a>
+                </Button>
+                <Button variant="gradient" size="xl" asChild>
+                  <a href="/site-visit">
+                    Schedule a Site Visit
+                    <ArrowRight size={18} className="ml-2" />
+                  </a>
+                </Button>
+              </div>
+            </div>
           </FadeIn>
         </div>
       </section>

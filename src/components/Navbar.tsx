@@ -5,9 +5,10 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
-import { X, Phone, Mail } from "lucide-react";
+import { X, Phone, Mail, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/components/ThemeProvider";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -25,6 +26,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () =>
@@ -56,10 +58,12 @@ export default function Navbar() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
           className={cn(
-            "pointer-events-auto w-full max-w-4xl rounded-full transition-all duration-500",
+            "pointer-events-auto w-full max-w-5xl rounded-full border transition-all duration-500",
             scrolled
-              ? "bg-gradient-to-r from-purple-800/95 via-purple-600/95 to-purple-800/95 backdrop-blur-2xl shadow-lg shadow-purple-900/40"
-              : "bg-transparent shadow-none"
+              ? theme === "dark"
+                ? "border-white/10 bg-purple-950/90 backdrop-blur-2xl shadow-[0_14px_40px_rgba(26,6,54,0.32)]"
+                : "border-purple-100/80 bg-white/95 backdrop-blur-2xl shadow-[0_14px_40px_rgba(58,30,92,0.16)]"
+              : "border-white/10 bg-purple-950/25 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.12)]"
           )}
         >
           <div className="flex items-center justify-between h-16 px-5 md:px-7">
@@ -88,7 +92,9 @@ export default function Navbar() {
                       "relative px-4 py-2 text-sm font-medium transition-colors duration-300 group",
                       active && scrolled
                         ? "text-purple-800"
-                        : "text-white/90 hover:text-white"
+                        : theme === "light" && scrolled
+                          ? "text-gray-700 hover:text-purple-800"
+                          : "text-white/90 hover:text-white"
                     )}
                   >
                     {link.name}
@@ -117,11 +123,21 @@ export default function Navbar() {
             </nav>
 
             {/* Desktop CTA */}
-            <div className="hidden lg:block">
+            <div className="hidden lg:flex items-center gap-2">
+              <motion.button
+                type="button"
+                onClick={toggleTheme}
+                aria-label={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                whileTap={{ scale: 0.88 }}
+                className="w-10 h-10 rounded-full border border-white/15 bg-white/10 text-yellow-300 flex items-center justify-center backdrop-blur-md transition-colors hover:bg-white/20"
+              >
+                {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+              </motion.button>
               <Button
-                variant="secondary"
+                variant="yellow"
                 size="lg"
-                className="rounded-full px-6 bg-white text-purple-800 hover:bg-purple-100 shadow-lg shadow-purple-900/25"
+                className="rounded-full px-6"
                 asChild
               >
                 <Link href="/consultation">Get Free Consultation</Link>
@@ -195,8 +211,8 @@ export default function Navbar() {
             exit={{ clipPath: "circle(0% at calc(100% - 3rem) 2.5rem)" }}
             transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           >
-            {/* Purple gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-800 via-purple-700 to-indigo-800" />
+            {/* Premium dark purple background */}
+            <div className="absolute inset-0 bg-[linear-gradient(145deg,#1a0636_0%,#3b0764_58%,#24123a_100%)]" />
 
             {/* Decorative floating circles */}
             <motion.div
@@ -290,6 +306,15 @@ export default function Navbar() {
               transition={{ delay: 0.5, duration: 0.4 }}
               className="relative px-6 pb-8 space-y-3"
             >
+              <button
+                type="button"
+                onClick={toggleTheme}
+                aria-label={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                className="w-full flex items-center justify-center gap-2 px-5 py-3.5 text-sm font-medium text-yellow-300 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors backdrop-blur-md border border-white/10"
+              >
+                {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+                {theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              </button>
               <a
                 href="tel:+919232525253"
                 className="flex items-center gap-3 px-5 py-3.5 text-sm font-medium text-white/80 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors backdrop-blur-md border border-white/10"

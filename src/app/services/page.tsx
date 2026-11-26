@@ -381,7 +381,7 @@ export default function Services() {
   return (
     <>
       {/* ===== Hero ===== */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[560px] h-[72svh] max-h-[760px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&h=1080&fit=crop"
@@ -391,7 +391,7 @@ export default function Services() {
             className="object-cover"
             unoptimized
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(26,6,54,.82)_0%,rgba(26,6,54,.45)_48%,rgba(26,6,54,.18)_100%)]" />
         </div>
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center pt-28 pb-16">
           <FadeIn>

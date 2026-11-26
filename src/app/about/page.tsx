@@ -11,7 +11,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { FadeIn, StaggerContainer, StaggerItem } from "@/components/Animations";
+import { FadeIn, ScrollReveal } from "@/components/Animations";
 import { TypedText } from "@/components/TypingText";
 
 const values = [
@@ -146,7 +146,7 @@ export default function About() {
   return (
     <>
       {/* Hero Section - Video Background */}
-      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[560px] h-[72svh] max-h-[760px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <video
             autoPlay
@@ -160,7 +160,7 @@ export default function About() {
               type="video/mp4"
             />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(26,6,54,.82)_0%,rgba(26,6,54,.45)_48%,rgba(26,6,54,.18)_100%)]" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
           <FadeIn>
@@ -186,10 +186,10 @@ export default function About() {
       </section>
 
       {/* About Content */}
-      <section className="py-24 px-4">
+      <section className="py-24 px-4 bg-background">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <FadeIn direction="left">
+            <ScrollReveal direction="left">
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-yellow-400/20 to-purple-400/20 rounded-3xl blur-2xl" />
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl">
@@ -207,9 +207,9 @@ export default function About() {
                   <div className="text-sVision Vm font-small">RERA CERTIFIED</div>
                 </div>
               </div>
-            </FadeIn>
+            </ScrollReveal>
 
-            <FadeIn direction="right">
+            <ScrollReveal direction="right">
               <div>
                 <Badge variant="yellow" className="mb-3">Our Story</Badge>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-3 mb-6 font-tech">
@@ -238,24 +238,30 @@ Today, we are building Vision Vistara as a scalable real-estate platform — wit
                     { icon: CheckCircle, text: "Technology building technology-led real estate processes" },
                     { icon: CheckCircle, text: "TodayConnecting investors, developers & property buyers" },
                     { icon: CheckCircle, text: "Expanding into new markets" },
-                  ].map((item) => (
+                  ].map((item, index) => (
                     <div
                       key={item.text}
                       className="flex items-center gap-2 text-gray-700"
                     >
-                      <item.icon size={18} className="text-green-500" />
-                      <span className="text-sm font-medium">{item.text}</span>
+                      <ScrollReveal
+                        direction={index % 2 === 0 ? "left" : "right"}
+                        delay={index * 0.16}
+                        className="flex items-center gap-2"
+                      >
+                        <item.icon size={18} className="text-green-500" />
+                        <span className="text-sm font-medium">{item.text}</span>
+                      </ScrollReveal>
                     </div>
                   ))}
                 </div>
               </div>
-            </FadeIn>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* Mission, Vision, Values */}
-      <section className="py-24 px-4 bg-purple-50">
+      <section className="py-24 px-4 bg-purple-50 dark:bg-[#21162C]">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <div className="text-center mb-16">
@@ -267,9 +273,14 @@ Today, we are building Vision Vistara as a scalable real-estate platform — wit
             </div>
           </FadeIn>
 
-          <StaggerContainer className="grid md:grid-cols-3 gap-8">
-            {values.map((value) => (
-              <StaggerItem key={value.title}>
+          <div className="grid md:grid-cols-3 gap-8">
+            {values.map((value, index) => (
+              <ScrollReveal
+                key={value.title}
+                direction={index === 0 ? "left" : index === 2 ? "right" : "up"}
+                delay={index * 0.18}
+                className="h-full"
+              >
                 <Card className="p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full">
                   <CardContent className="p-0">
                     <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
@@ -283,9 +294,9 @@ Today, we are building Vision Vistara as a scalable real-estate platform — wit
                     </p>
                   </CardContent>
                 </Card>
-              </StaggerItem>
+              </ScrollReveal>
             ))}
-          </StaggerContainer>
+          </div>
         </div>
       </section>
 
@@ -305,10 +316,10 @@ Today, we are building Vision Vistara as a scalable real-estate platform — wit
             {/* Vertical line: left on mobile, center on md+ */}
             <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 w-1 h-full bg-purple-200" />
             {milestones.map((milestone, i) => (
-              <FadeIn
+              <ScrollReveal
                 key={milestone.year}
                 direction={i % 2 === 0 ? "left" : "right"}
-                delay={i * 0.1}
+                delay={0}
               >
                 <div
                   className={`relative flex md:items-center mb-12 pl-10 md:pl-0 ${
@@ -338,7 +349,7 @@ Today, we are building Vision Vistara as a scalable real-estate platform — wit
                   </div>
                   <div className="hidden md:block w-1/2" />
                 </div>
-              </FadeIn>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -347,7 +358,7 @@ Today, we are building Vision Vistara as a scalable real-estate platform — wit
       {/* Team Section */}
       <section
         id="our-team"
-        className="py-16 px-4 bg-gradient-to-b from-purple-50 to-white scroll-mt-20"
+        className="py-16 px-4 bg-[#F4EFE8] dark:bg-[#18171C] scroll-mt-20"
       >
         <div className="max-w-6xl mx-auto">
           <FadeIn>
@@ -365,28 +376,30 @@ Today, we are building Vision Vistara as a scalable real-estate platform — wit
 
           {/* Founder & CEO - Centered */}
           <div className="flex justify-center mb-10">
-            <motion.div whileHover={{ y: -3 }} className="w-60">
-              <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
-                <div className="relative aspect-square overflow-hidden">
-                  <Image
-                    src={team[0].image}
-                    alt={team[0].name}
-                    fill
-                    className="object-cover"
-                    unoptimized
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-2 text-center">
-                    <h3 className="text-[12px] font-bold text-white font-tech leading-tight">
-                      {team[0].name}
-                    </h3>
-                    <p className="text-yellow-400 text-[10px] mt-0.5">
-                      {team[0].role}
-                    </p>
+            <ScrollReveal direction="up" className="w-60">
+              <motion.div whileHover={{ y: -3 }} className="w-60">
+                <Card className="team-member-card overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
+                  <div className="relative aspect-square overflow-hidden">
+                    <Image
+                      src={team[0].image}
+                      alt={team[0].name}
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-2 text-center">
+                      <h3 className="text-[12px] font-bold text-white font-tech leading-tight">
+                        {team[0].name}
+                      </h3>
+                      <p className="text-yellow-400 text-[10px] mt-0.5">
+                        {team[0].role}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Card>
-            </motion.div>
+                </Card>
+              </motion.div>
+            </ScrollReveal>
           </div>
 
           {/* Sales Team */}
@@ -399,55 +412,69 @@ Today, we are building Vision Vistara as a scalable real-estate platform — wit
           </FadeIn>
           <div className="flex flex-col items-center gap-3 mb-10">
             <div className="flex flex-wrap justify-center gap-3 max-w-5xl">
-              {team.filter(m => m.category === "sales").slice(0, 5).map((member) => (
-                <motion.div key={member.name} whileHover={{ y: -3 }} className="w-40">
-                  <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
-                    <div className="relative aspect-square overflow-hidden">
-                      <Image
-                        src={member.image}
-                        alt={member.name}
-                        fill
-                        className="object-cover"
-                        unoptimized
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
-                    </div>
-                    <CardContent className="p-2 text-center">
-                      <h3 className="text-[11px] font-bold text-gray-900 font-tech leading-tight truncate">
-                        {member.name}
-                      </h3>
-                      <p className="text-purple-600 text-[9px] mt-0.5 truncate">
-                        {member.role}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+              {team.filter(m => m.category === "sales").slice(0, 5).map((member, index) => (
+                <ScrollReveal
+                  key={member.name}
+                  direction={index % 2 === 0 ? "left" : "right"}
+                  delay={index * 0.16}
+                  className="w-40"
+                >
+                  <motion.div whileHover={{ y: -3 }} className="w-40">
+                    <Card className="team-member-card overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
+                      <div className="relative aspect-square overflow-hidden">
+                        <Image
+                          src={member.image}
+                          alt={member.name}
+                          fill
+                          className="object-cover"
+                          unoptimized
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
+                      </div>
+                      <CardContent className="p-2 text-center">
+                        <h3 className="text-[11px] font-bold text-gray-900 font-tech leading-tight truncate">
+                          {member.name}
+                        </h3>
+                        <p className="text-purple-600 text-[9px] mt-0.5 truncate">
+                          {member.role}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </ScrollReveal>
               ))}
             </div>
             <div className="flex flex-wrap justify-center gap-3 max-w-4xl">
-              {team.filter(m => m.category === "sales").slice(5).map((member) => (
-                <motion.div key={member.name} whileHover={{ y: -3 }} className="w-40">
-                  <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
-                    <div className="relative aspect-square overflow-hidden">
-                      <Image
-                        src={member.image}
-                        alt={member.name}
-                        fill
-                        className="object-cover"
-                        unoptimized
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
-                    </div>
-                    <CardContent className="p-2 text-center">
-                      <h3 className="text-[11px] font-bold text-gray-900 font-tech leading-tight truncate">
-                        {member.name}
-                      </h3>
-                      <p className="text-purple-600 text-[9px] mt-0.5 truncate">
-                        {member.role}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+              {team.filter(m => m.category === "sales").slice(5).map((member, index) => (
+                <ScrollReveal
+                  key={member.name}
+                  direction={index % 2 === 0 ? "left" : "right"}
+                  delay={index * 0.16}
+                  className="w-40"
+                >
+                  <motion.div whileHover={{ y: -3 }} className="w-40">
+                    <Card className="team-member-card overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
+                      <div className="relative aspect-square overflow-hidden">
+                        <Image
+                          src={member.image}
+                          alt={member.name}
+                          fill
+                          className="object-cover"
+                          unoptimized
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
+                      </div>
+                      <CardContent className="p-2 text-center">
+                        <h3 className="text-[11px] font-bold text-gray-900 font-tech leading-tight truncate">
+                          {member.name}
+                        </h3>
+                        <p className="text-purple-600 text-[9px] mt-0.5 truncate">
+                          {member.role}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </ScrollReveal>
               ))}
             </div>
           </div>
@@ -461,29 +488,36 @@ Today, we are building Vision Vistara as a scalable real-estate platform — wit
             </div>
           </FadeIn>
           <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 gap-4 mb-10 max-w-xl mx-auto">
-            {team.filter(m => m.category === "creative").map((member) => (
-              <motion.div key={member.name} whileHover={{ y: -3 }} className="w-full">
-                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
-                  <div className="relative aspect-square overflow-hidden">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      className="object-cover"
-                      unoptimized
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-2 text-center">
-                      <h3 className="text-[11px] font-bold text-white font-tech leading-tight">
-                        {member.name}
-                      </h3>
-                      <p className="text-yellow-400 text-[9px] mt-0.5">
-                        {member.role}
-                      </p>
+            {team.filter(m => m.category === "creative").map((member, index) => (
+              <ScrollReveal
+                key={member.name}
+                direction={index % 2 === 0 ? "left" : "right"}
+                delay={index * 0.17}
+                className="w-full"
+              >
+                <motion.div whileHover={{ y: -3 }} className="w-full">
+                  <Card className="team-member-card overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
+                    <div className="relative aspect-square overflow-hidden">
+                      <Image
+                        src={member.image}
+                        alt={member.name}
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-2 text-center">
+                        <h3 className="text-[11px] font-bold text-white font-tech leading-tight">
+                          {member.name}
+                        </h3>
+                        <p className="text-yellow-400 text-[9px] mt-0.5">
+                          {member.role}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </Card>
-              </motion.div>
+                  </Card>
+                </motion.div>
+              </ScrollReveal>
             ))}
           </div>
 
@@ -496,29 +530,36 @@ Today, we are building Vision Vistara as a scalable real-estate platform — wit
             </div>
           </FadeIn>
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-10 max-w-md mx-auto">
-            {team.filter(m => m.category === "tech" || m.category === "accounts").map((member) => (
-              <motion.div key={member.name} whileHover={{ y: -3 }} className="w-full">
-                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
-                  <div className="relative aspect-square overflow-hidden">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      className="object-cover"
-                      unoptimized
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-2 text-center">
-                      <h3 className="text-[11px] font-bold text-white font-tech leading-tight">
-                        {member.name}
-                      </h3>
-                      <p className="text-yellow-400 text-[9px] mt-0.5">
-                        {member.role}
-                      </p>
+            {team.filter(m => m.category === "tech" || m.category === "accounts").map((member, index) => (
+              <ScrollReveal
+                key={member.name}
+                direction={index % 2 === 0 ? "left" : "right"}
+                delay={index * 0.17}
+                className="w-full"
+              >
+                <motion.div whileHover={{ y: -3 }} className="w-full">
+                  <Card className="team-member-card overflow-hidden hover:shadow-lg transition-all duration-300 border-0 shadow-sm">
+                    <div className="relative aspect-square overflow-hidden">
+                      <Image
+                        src={member.image}
+                        alt={member.name}
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-2 text-center">
+                        <h3 className="text-[11px] font-bold text-white font-tech leading-tight">
+                          {member.name}
+                        </h3>
+                        <p className="text-yellow-400 text-[9px] mt-0.5">
+                          {member.role}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </Card>
-              </motion.div>
+                  </Card>
+                </motion.div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
